@@ -14,7 +14,7 @@ public class App04
 
     public boolean traverseLinkedList_LessThan_O_n()
     {
-        // todo logic 
+        // todo logic //
         return false;
     }
 
