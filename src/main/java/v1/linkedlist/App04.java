@@ -25,6 +25,7 @@ public class App04 {
     public Node _27_flatten_A_LinkedList(Node node) {
         Node result = null;
 
+        // merge 2 linked list is the approach
         Node right = node.right;
         Node down = node;
 
