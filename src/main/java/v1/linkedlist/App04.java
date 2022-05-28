@@ -207,43 +207,43 @@ public class App04 {
         return root;
     }
 
-    private Node merge_LinkedList_And_Sort(Node n1, Node n2, boolean isResultNodeN1) {
-        System.out.println("n1: " + n1.asArray());
-        System.out.println("n2: " + n2.asArray());
-        Node result = new Node();
-        while (true) {
-            if (n1 == null || n2 == null)
-                break;
-            if (n1.data < n2.data) {
-                result.append(n1.data);
-                n1 = n1.next;
-            } else if (n2.data < n1.data) {
-                result.append(n2.data);
-                n2 = n2.next;
-            } else { // both values are same so add twice
-                result.append(n2.data);
-                result.append(n2.data);
-                n2 = n2.next;
-                n1 = n1.next;
-            }
-        }
-        if (n1 != null) {
-            Node temp = n1;
-            while (temp != null) {
-                result.append(temp.data);
-                temp = temp.next;
-            }
-
-        }
-
-        if (n2 != null) {
-            Node temp = n2;
-            while (temp != null) {
-                result.append(temp.data);
-                temp = temp.next;
-            }
-        }
-        System.out.println("r: " + result.asArray());
-        return result;
-    }
+//    private Node merge_LinkedList_And_Sort(Node n1, Node n2, boolean isResultNodeN1) {
+//        System.out.println("n1: " + n1.asArray());
+//        System.out.println("n2: " + n2.asArray());
+//        Node result = new Node();
+//        while (true) {
+//            if (n1 == null || n2 == null)
+//                break;
+//            if (n1.data < n2.data) {
+//                result.append(n1.data);
+//                n1 = n1.next;
+//            } else if (n2.data < n1.data) {
+//                result.append(n2.data);
+//                n2 = n2.next;
+//            } else { // both values are same so add twice
+//                result.append(n2.data);
+//                result.append(n2.data);
+//                n2 = n2.next;
+//                n1 = n1.next;
+//            }
+//        }
+//        if (n1 != null) {
+//            Node temp = n1;
+//            while (temp != null) {
+//                result.append(temp.data);
+//                temp = temp.next;
+//            }
+//
+//        }
+//
+//        if (n2 != null) {
+//            Node temp = n2;
+//            while (temp != null) {
+//                result.append(temp.data);
+//                temp = temp.next;
+//            }
+//        }
+//        System.out.println("r: " + result.asArray());
+//        return result;
+//    }
 }
