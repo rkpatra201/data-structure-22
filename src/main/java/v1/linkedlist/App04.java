@@ -1,7 +1,6 @@
 package v1.linkedlist;
 
 
-import commons.DsUtils;
 import commons.Node;
 
 /**
@@ -29,10 +28,10 @@ public class App04 {
         Node right = node.right;
         Node down = node;
 
-        result = merge_LinkedList_And_Sort(right, down, false);
+        result = _30_merge_LinkedList_And_Sort(right, down);
         Node tempRight = right.right;
         while (tempRight != null) {
-            result = merge_LinkedList_And_Sort(result, tempRight, true);
+            result = _30_merge_LinkedList_And_Sort(result, tempRight);
             tempRight = tempRight.right;
         }
         System.out.println("final result: " + result.asArray());
@@ -135,6 +134,77 @@ public class App04 {
         }
         evenListCurrent.next = node;
         return evenList.next;
+    }
+
+    public Node _30_merge_LinkedList_And_Sort(Node node1, Node node2) {
+        if (node1 != null && node2 != null && node1.data >= node2.data) { // set node1.data is not greater than node2.data
+            Node temp = node1;
+            node1 = node2;
+            node2 = temp;
+        }
+        Node root = node1;
+        Node result = root;
+        Node n1Next = null;
+        Node n2Next = null;
+        while (true) {
+            if (node1 == null || node2 == null)
+                break;
+            if (node1.data < node2.data) {
+                //result.append(n1.data);
+                n1Next = node1.next;
+                result.next = node1;
+                result = result.next;
+                result.next = null;
+                node1 = n1Next;
+            } else if (node2.data < node1.data) {
+                // result.append(n2.data);
+                n2Next = node2.next;
+                result.next = node2;
+                result = result.next;
+                result.next = null;
+                node2 = n2Next;
+            } else { // both values are same so add twice
+                // result.append(n2.data);
+                // result.append(n2.data);
+
+                n1Next = node1.next;
+                n2Next = node2.next;
+                result.next = node1;
+                result = result.next;
+
+                result.next = node2;
+                result = result.next;
+                result.next = null;
+                node2 = n2Next;
+                node1 = n1Next;
+            }
+        }
+        while (node1 != null) {
+            if (root == null) {
+                root = node1;
+                return root;
+            }
+            n1Next = node1.next;
+            result.next = node1;
+            result = result.next;
+            result.next = null;
+            node1 = n1Next;
+        }
+
+        while (node2 != null) {
+            if (root == null) {
+                root = node2;
+                return root;
+            }
+            n2Next = node2.next;
+            result.next = node2;
+            result = result.next;
+            result.next = null;
+            node2 = n2Next;
+        }
+        // root = root.next;
+        System.out.println("r: " + root.asArray());
+        return root;
     }
 
     private Node merge_LinkedList_And_Sort(Node n1, Node n2, boolean isResultNodeN1) {

@@ -52,7 +52,8 @@ public class Node {
     public Node reverse() {
         // 1, 2, 3, 4, 5
         //  2, 1, 3, 4, 5
-        Node current = this.next; // 2,3,4,5
+        Node oldRoot = root;
+        Node current = root.next; // 2,3,4,5
         root.next = null; // root 1 - null
         while (current != null) {
             Node currentNext = current.next; // 3 - 4 -5
@@ -61,6 +62,7 @@ public class Node {
             root = temp; // root 2 - 1 - null
             current = currentNext; // 3 - 4 - 5
         }
+        root.last = oldRoot;// unused in this context
         return root;
     }
 }

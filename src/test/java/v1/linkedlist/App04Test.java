@@ -7,8 +7,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @Tag("UnitTest")
 class App04Test {
 
@@ -74,5 +72,55 @@ class App04Test {
         Node node = DsUtils.arrayToLinkedList(1, 2, 2, 3, 4, 5, 6, 6, 7);
         Node result = app04._33_segregate_even_odd_linked_list_1(node);
         System.out.println("result: " + result.asArray());
+    }
+
+    @Test
+    void _x_merge_LinkedList_And_Sort_1() { // node1.data == node2.data
+        Node node2 = DsUtils.arrayToLinkedList(1, 2, 3, 4);
+        Node node1 = DsUtils.arrayToLinkedList(1, 4, 5, 6);
+        Node result = app04._30_merge_LinkedList_And_Sort(node1, node2);
+        System.out.println("result: "+result.asArray());
+    }
+
+    @Test
+    void _x_merge_LinkedList_And_Sort_2() { // node2.data > node1.data
+        Node node2 = DsUtils.arrayToLinkedList(1, 2, 3, 4);
+        Node node1 = DsUtils.arrayToLinkedList(3, 4, 5, 6);
+        Node result = app04._30_merge_LinkedList_And_Sort(node1, node2);
+        System.out.println("result: "+result.asArray());
+    }
+
+    @Test
+    void _x_merge_LinkedList_And_Sort_3() { // node1.data < node2.data
+        Node node1 = DsUtils.arrayToLinkedList(1, 2, 3, 4);
+        Node node2 = DsUtils.arrayToLinkedList(3, 4, 5, 6);
+        Node result = app04._30_merge_LinkedList_And_Sort(node1, node2);
+        System.out.println("result: "+result.asArray());
+    }
+
+    @Test
+    void _x_merge_LinkedList_And_Sort_4() { // node1 is large in size
+        Node node1 = DsUtils.arrayToLinkedList(1, 2, 3, 3);
+        Node node2 = DsUtils.arrayToLinkedList(4, 5, 6);
+        Node result = app04._30_merge_LinkedList_And_Sort(node1, node2);
+        System.out.println("result: "+result.asArray());
+    }
+
+    @Test
+    void _x_merge_LinkedList_And_Sort_5() { // node2 is large in size
+        Node node1 = DsUtils.arrayToLinkedList(1, 2, 3);
+        Node node2 = DsUtils.arrayToLinkedList(4, 5, 6,7);
+        Node result = app04._30_merge_LinkedList_And_Sort(node1, node2);
+        System.out.println("result: "+result.asArray());
+    }
+
+    @Test
+    void _x_merge_LinkedList_And_Sort_6() { // one of the node is null
+        Node node1 = DsUtils.arrayToLinkedList(1, 2, 3);
+        Node node2 = DsUtils.arrayToLinkedList(4, 5, 6,7);
+        Node result = app04._30_merge_LinkedList_And_Sort(null, node2);
+        System.out.println("result: "+result.asArray());
+        result = app04._30_merge_LinkedList_And_Sort(node1, null);
+        System.out.println("result: "+result.asArray());
     }
 }
