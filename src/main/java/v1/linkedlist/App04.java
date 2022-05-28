@@ -86,6 +86,29 @@ public class App04 {
     }
 
 
+    public Node _33_segregate_even_odd_linked_list_1(Node root) {
+
+        Node prev = null;
+        Node current = root;
+        while (current != null) {
+            if (current.data % 2 == 0) {
+                // detach/delete the current node
+                prev.next = current.next;
+                Node temp = current;
+                temp.next = null;
+                current = prev.next;
+
+                // attach/insert the current node before root
+                temp.next = root;
+                root = temp;
+                continue;
+            }
+            prev = current;
+            current = current.next;
+        }
+        return root;
+    }
+
     public Node _33_segregate_even_odd_linked_list(Node node) {
         Node current = node;
         Node evenList = new Node();

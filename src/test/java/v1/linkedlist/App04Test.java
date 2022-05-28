@@ -67,4 +67,12 @@ class App04Test {
         Node result = app04._33_segregate_even_odd_linked_list(node);
         System.out.println("result: " + result.asArray());
     }
+
+
+    @Test
+    void _33_segregate_even_odd_linked_list_1() {
+        Node node = DsUtils.arrayToLinkedList(1, 2, 2, 3, 4, 5, 6, 6, 7);
+        Node result = app04._33_segregate_even_odd_linked_list_1(node);
+        System.out.println("result: " + result.asArray());
+    }
 }
