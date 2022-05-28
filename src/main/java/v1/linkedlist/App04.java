@@ -35,8 +35,39 @@ public class App04 {
             result = merge_LinkedList_And_Sort(result, tempRight, true);
             tempRight = tempRight.right;
         }
-        System.out.println("final result: "+ result.asArray());
+        System.out.println("final result: " + result.asArray());
         return result;
+    }
+
+    public Node _28_sort_LinkedList_With_0_1_2(Node node) {
+        Node node0 = new Node();
+        Node node1 = new Node();
+        Node node2 = new Node();
+
+        Node current = node;
+        Node zeroCurrent = node0;
+        Node oneCurrent = node1;
+        Node twoCurrent = node2;
+        while (current != null) {
+            Node currNext = current.next;
+            if (current.data == 0) {
+                zeroCurrent.next = current;
+                zeroCurrent = zeroCurrent.next;
+              //  zeroCurrent.next = null;
+            } else if (current.data == 1) {
+                oneCurrent.next = current;
+                oneCurrent = oneCurrent.next;
+               // oneCurrent.next = null;
+            } else if (current.data == 2) {
+                twoCurrent.next = current;
+                twoCurrent = twoCurrent.next;
+                twoCurrent.next = null;
+            }
+            current = currNext;
+        }
+        zeroCurrent.next = node1.next;
+        oneCurrent.next = node2.next;
+        return node0.next;
     }
 
     private Node merge_LinkedList_And_Sort(Node n1, Node n2, boolean isResultNodeN1) {

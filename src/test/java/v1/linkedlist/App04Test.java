@@ -2,6 +2,7 @@ package v1.linkedlist;
 
 import commons.DsUtils;
 import commons.Node;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -29,5 +30,21 @@ class App04Test {
         list2.right = list3;
         list3.right = list4;
         app04._27_flatten_A_LinkedList(list1);
+    }
+
+    @Test
+    void reverseLinkedList() {
+        Node node = DsUtils.arrayToLinkedList(1, 2, 3, 4, 5);
+        Node reverse = node.reverse();
+        System.out.println("reverse: " + reverse.asArray());
+    }
+
+    @Test
+    void _28_sort_LinkedList_With_0_1_2() {
+        Node node = DsUtils.arrayToLinkedList(2, 1, 1, 0, 2, 2, 0, 1, 0, 1, 0, 0, 2, 2);
+        int len = node.asArray().size();
+        Node result = app04._28_sort_LinkedList_With_0_1_2(node);
+        System.out.println("result: " + result.asArray());
+        Assertions.assertEquals(len, result.asArray().size());
     }
 }
