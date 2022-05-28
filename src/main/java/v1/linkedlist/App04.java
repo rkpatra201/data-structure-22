@@ -53,21 +53,65 @@ public class App04 {
             if (current.data == 0) {
                 zeroCurrent.next = current;
                 zeroCurrent = zeroCurrent.next;
-              //  zeroCurrent.next = null;
+                //  zeroCurrent.next = null;
             } else if (current.data == 1) {
                 oneCurrent.next = current;
                 oneCurrent = oneCurrent.next;
-               // oneCurrent.next = null;
+                // oneCurrent.next = null;
             } else if (current.data == 2) {
                 twoCurrent.next = current;
                 twoCurrent = twoCurrent.next;
-                twoCurrent.next = null;
+                //    twoCurrent.next = null;
             }
             current = currNext;
         }
         zeroCurrent.next = node1.next;
         oneCurrent.next = node2.next;
         return node0.next;
+    }
+
+    public Node _34_find_NthNode_FromEnd(Node node, int n) {
+        Node front = node;
+        Node back = node;
+
+        while (n != 0) {
+            front = front.next;
+            n--;
+        }
+        while (front != null) {
+            front = front.next;
+            back = back.next;
+        }
+        return back;
+    }
+
+
+    public Node _33_segregate_even_odd_linked_list(Node node) {
+        Node current = node;
+        Node evenList = new Node();
+        Node evenListCurrent = evenList;
+        Node prev = null;
+        while (current != null) {
+            if (current == node) {
+                prev = current;
+                current = current.next;
+                continue;
+            }
+            Node currNext = current.next;
+            if (current.data % 2 == 0) {
+                evenListCurrent.next = current;
+                current.next = null;
+                evenListCurrent = evenListCurrent.next;
+
+                prev.next = currNext;
+                current = currNext;
+                continue;
+            }
+            prev = current;
+            current = currNext;
+        }
+        evenListCurrent.next = node;
+        return evenList.next;
     }
 
     private Node merge_LinkedList_And_Sort(Node n1, Node n2, boolean isResultNodeN1) {

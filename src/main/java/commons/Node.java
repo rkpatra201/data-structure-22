@@ -5,10 +5,26 @@ import java.util.List;
 public class Node {
     public Integer data;
     public Node next;
+    public Node prev;
     public Node right;
     public Node last;
     public Node root;
     public int size;
+
+    public void appendDll(int data) {
+        if (this.data == null) {
+            this.data = data;
+            this.last = this;
+            this.prev = this;
+            this.root = this;
+        } else {
+            Node temp = new Node();
+            temp.data = data;
+            temp.prev = getLast();
+            getLast().next = temp;
+            this.last = temp;
+        }
+    }
 
     public void append(int data) {
         size++;

@@ -47,4 +47,24 @@ class App04Test {
         System.out.println("result: " + result.asArray());
         Assertions.assertEquals(len, result.asArray().size());
     }
+
+    @Test
+    void _buildDoubleLinkedList() {
+        Node node = DsUtils.buildDoubleLinkedList(1, 2, 3);
+        System.out.println(node.asArray());
+    }
+
+    @Test
+    void _34_find_NthNode_FromEnd() {
+        Node node = DsUtils.arrayToLinkedList(1, 2, 3, 4, 5, 6, 7);
+        Node result = app04._34_find_NthNode_FromEnd(node, 3);
+        System.out.println("node from end location: " + result.data);
+    }
+
+    @Test
+    void _33_segregate_even_odd_linked_list() {
+        Node node = DsUtils.arrayToLinkedList(1, 2, 2, 3, 4, 5, 6, 6, 7);
+        Node result = app04._33_segregate_even_odd_linked_list(node);
+        System.out.println("result: " + result.asArray());
+    }
 }

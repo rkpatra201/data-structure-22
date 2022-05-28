@@ -36,4 +36,13 @@ public class DsUtils {
         }
         return root;
     }
+
+    public static Node buildDoubleLinkedList(int... arr) {
+        Node root = new Node();
+        root.append(arr[0]);
+        for (int i = 1; i < arr.length; i++) {
+            root.appendDll(arr[i]);
+        }
+        return root;
+    }
 }
