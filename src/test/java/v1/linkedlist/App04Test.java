@@ -123,4 +123,11 @@ class App04Test {
         result = app04._30_merge_LinkedList_And_Sort(node1, null);
         System.out.println("result: "+result.asArray());
     }
+
+    @Test
+    void testCircularLinkedList()
+    {
+        Node node = DsUtils.arrayToCircularLinkedList(1,2,3);
+        System.out.println("result: "+node.asArray());
+    }
 }
