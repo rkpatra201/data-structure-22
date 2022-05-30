@@ -130,4 +130,15 @@ class App04Test {
         Node node = DsUtils.arrayToCircularLinkedList(1,2,3);
         System.out.println("result: "+node.asArray());
     }
+
+    @Test
+    void _32_deleteNodesWhichHaveGreaterValueOnRight() {
+        Node node = DsUtils.arrayToLinkedList(10, 200, 70, 14, 40, 26, 50);
+        Node result = app04._32_deleteNodesWhichHaveGreaterValueOnRight(node);
+        System.out.println("result: "+result.asArray());
+
+        node = DsUtils.arrayToLinkedList(10, 20 , 5, 4, 3, 11);
+        result = app04._32_deleteNodesWhichHaveGreaterValueOnRight(node);
+        System.out.println("result: "+result.asArray());
+    }
 }
