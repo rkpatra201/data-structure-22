@@ -79,7 +79,7 @@ class App04Test {
         Node node2 = DsUtils.arrayToLinkedList(1, 2, 3, 4);
         Node node1 = DsUtils.arrayToLinkedList(1, 4, 5, 6);
         Node result = app04._30_merge_LinkedList_And_Sort(node1, node2);
-        System.out.println("result: "+result.asArray());
+        System.out.println("result: " + result.asArray());
     }
 
     @Test
@@ -87,7 +87,7 @@ class App04Test {
         Node node2 = DsUtils.arrayToLinkedList(1, 2, 3, 4);
         Node node1 = DsUtils.arrayToLinkedList(3, 4, 5, 6);
         Node result = app04._30_merge_LinkedList_And_Sort(node1, node2);
-        System.out.println("result: "+result.asArray());
+        System.out.println("result: " + result.asArray());
     }
 
     @Test
@@ -95,7 +95,7 @@ class App04Test {
         Node node1 = DsUtils.arrayToLinkedList(1, 2, 3, 4);
         Node node2 = DsUtils.arrayToLinkedList(3, 4, 5, 6);
         Node result = app04._30_merge_LinkedList_And_Sort(node1, node2);
-        System.out.println("result: "+result.asArray());
+        System.out.println("result: " + result.asArray());
     }
 
     @Test
@@ -103,42 +103,54 @@ class App04Test {
         Node node1 = DsUtils.arrayToLinkedList(1, 2, 3, 3);
         Node node2 = DsUtils.arrayToLinkedList(4, 5, 6);
         Node result = app04._30_merge_LinkedList_And_Sort(node1, node2);
-        System.out.println("result: "+result.asArray());
+        System.out.println("result: " + result.asArray());
     }
 
     @Test
     void _x_merge_LinkedList_And_Sort_5() { // node2 is large in size
         Node node1 = DsUtils.arrayToLinkedList(1, 2, 3);
-        Node node2 = DsUtils.arrayToLinkedList(4, 5, 6,7);
+        Node node2 = DsUtils.arrayToLinkedList(4, 5, 6, 7);
         Node result = app04._30_merge_LinkedList_And_Sort(node1, node2);
-        System.out.println("result: "+result.asArray());
+        System.out.println("result: " + result.asArray());
     }
 
     @Test
     void _x_merge_LinkedList_And_Sort_6() { // one of the node is null
         Node node1 = DsUtils.arrayToLinkedList(1, 2, 3);
-        Node node2 = DsUtils.arrayToLinkedList(4, 5, 6,7);
+        Node node2 = DsUtils.arrayToLinkedList(4, 5, 6, 7);
         Node result = app04._30_merge_LinkedList_And_Sort(null, node2);
-        System.out.println("result: "+result.asArray());
+        System.out.println("result: " + result.asArray());
         result = app04._30_merge_LinkedList_And_Sort(node1, null);
-        System.out.println("result: "+result.asArray());
+        System.out.println("result: " + result.asArray());
     }
 
     @Test
-    void testCircularLinkedList()
-    {
-        Node node = DsUtils.arrayToCircularLinkedList(1,2,3);
-        System.out.println("result: "+node.asArray());
+    void testCircularLinkedList() {
+        Node node = DsUtils.arrayToCircularLinkedList(1, 2, 3);
+        System.out.println("result: " + node.asArray());
     }
 
     @Test
     void _32_deleteNodesWhichHaveGreaterValueOnRight() {
         Node node = DsUtils.arrayToLinkedList(10, 200, 70, 14, 40, 26, 50);
         Node result = app04._32_deleteNodesWhichHaveGreaterValueOnRight(node);
-        System.out.println("result: "+result.asArray());
+        System.out.println("result: " + result.asArray());
 
-        node = DsUtils.arrayToLinkedList(10, 20 , 5, 4, 3, 11);
+        node = DsUtils.arrayToLinkedList(10, 20, 5, 4, 3, 11);
         result = app04._32_deleteNodesWhichHaveGreaterValueOnRight(node);
-        System.out.println("result: "+result.asArray());
+        System.out.println("result: " + result.asArray());
+    }
+
+    @Test
+    void _31_multiply_LinkedList() {
+        Node node1 = DsUtils.arrayToLinkedList(1, 0);
+        Node node2 = DsUtils.arrayToLinkedList(1, 0);
+        int result = app04._31_multiply_LinkedList(node1, node2);
+        System.out.println(result);
+
+        node1 = DsUtils.arrayToLinkedList(2, 5);
+        node2 = DsUtils.arrayToLinkedList(50);
+        result = app04._31_multiply_LinkedList(node1, node2);
+        System.out.println(result);
     }
 }

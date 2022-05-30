@@ -272,6 +272,27 @@ public class App04 {
         return newRoot.reverse();
     }
 
+    public int _31_multiply_LinkedList(Node root1, Node root2) {
+        Node n1 = root1.reverse();
+        Node n2 = root2.reverse();
+        int v1 = 0;
+        int v2 = 0;
+        Node current = n1;
+        int i = 0;
+        while (current != null) {
+            v1 = (int) (v1 + Math.pow(10, i++) * current.data);
+            current = current.next;
+        }
+
+        current = n2;
+        i = 0;
+        while (current != null) {
+            v2 = (int) (v2 + Math.pow(10, i++) * current.data);
+            current = current.next;
+        }
+        return v1 * v2;
+    }
+
 //    private Node merge_LinkedList_And_Sort(Node n1, Node n2, boolean isResultNodeN1) {
 //        System.out.println("n1: " + n1.asArray());
 //        System.out.println("n2: " + n2.asArray());
