@@ -18,15 +18,18 @@ public class DsUtils {
     }
 
 
+    // 192.168.1.38
     public static List<Integer> linkedListAsArray(Node node) {
-        Node last = node.last;
+        Node last = node;
         Node temp = node;
         List<Integer> list = new ArrayList<>();
+        list.add(temp.data);
+        temp = temp.next;
         while (temp != null) {
-            list.add(temp.data);
             if (last == temp) {
                 break;
             }
+            list.add(temp.data);
             temp = temp.next;
         }
         return list;
