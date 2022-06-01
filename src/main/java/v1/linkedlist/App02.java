@@ -33,6 +33,28 @@ public class App02 {
         return  res;
     }
 
+    public Node _10_intersection_of_two_sorted_linkedLists(Node node1, Node node2){
+        Node res = null;
+        res = intersection(node1,node2);
+        return res;
+    }
+
+    private Node intersection(Node node1, Node node2) {
+        Node res = new Node();
+        while ((node1 != null) && (node2 != null)){
+           if (node1.data == node2.data){
+               res.append(node1.data);
+               node1 = node1.next;
+               node2 = node2.next;
+           } else if (node1.data > node2.data){
+               node2 = node2.next;
+           } else {
+               node1 = node1.next;
+           }
+        }
+        return res;
+    }
+
     private Node addTwoLists(Node list1, Node list2) {
         // initializing result list
         Node result = new Node();

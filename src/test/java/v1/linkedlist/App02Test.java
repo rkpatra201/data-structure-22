@@ -51,6 +51,14 @@ public class App02Test {
     }
 
     @Test
+    public void _10_intersection_of_two_sorted_linkedLists(){
+        Node list1 = DsUtils.arrayToLinkedList(1,8,9,14, 25, 50);
+        Node list2 = DsUtils.arrayToLinkedList(2,8,9,14,50);
+        Node res = new App02()._10_intersection_of_two_sorted_linkedLists(list1, list2);
+        System.out.println("Result : "+ DsUtils.linkedListAsArray(res));
+    }
+
+    @Test
     public void _linkedListToArray(){
         Node list = DsUtils.arrayToLinkedList(1,2,3);
         System.out.println("List as array : "+DsUtils.linkedListAsArray(list).size());
