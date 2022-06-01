@@ -40,7 +40,6 @@ public class Node {
         this.last = temp;
     }
 
-
     private Node getLast() {
         return this.last;
     }

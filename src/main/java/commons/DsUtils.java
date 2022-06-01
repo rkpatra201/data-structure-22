@@ -11,10 +11,24 @@ public class DsUtils {
         return root;
     }
 
+    public static Node arrayToCircularLinkedList(int... arr) {
+        Node root = buildLinkedList(arr);
+        root.last.next = root;
+        return root;
+    }
+
+
+    // 192.168.1.38
     public static List<Integer> linkedListAsArray(Node node) {
+        Node last = node;
         Node temp = node;
         List<Integer> list = new ArrayList<>();
+        list.add(temp.data);
+        temp = temp.next;
         while (temp != null) {
+            if (last == temp) {
+                break;
+            }
             list.add(temp.data);
             temp = temp.next;
         }

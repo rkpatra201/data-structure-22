@@ -44,28 +44,28 @@ public class App04 {
         Node node2 = new Node();
 
         Node current = node;
-        Node zeroCurrent = node0;
-        Node oneCurrent = node1;
-        Node twoCurrent = node2;
+        Node zeroCurrentLast = node0;
+        Node oneCurrentLast = node1;
+        Node twoCurrentLast = node2;
         while (current != null) {
             Node currNext = current.next;
             if (current.data == 0) {
-                zeroCurrent.next = current;
-                zeroCurrent = zeroCurrent.next;
+                zeroCurrentLast.next = current;
+                zeroCurrentLast = zeroCurrentLast.next;
                 //  zeroCurrent.next = null;
             } else if (current.data == 1) {
-                oneCurrent.next = current;
-                oneCurrent = oneCurrent.next;
+                oneCurrentLast.next = current;
+                oneCurrentLast = oneCurrentLast.next;
                 // oneCurrent.next = null;
             } else if (current.data == 2) {
-                twoCurrent.next = current;
-                twoCurrent = twoCurrent.next;
+                twoCurrentLast.next = current;
+                twoCurrentLast = twoCurrentLast.next;
                 //    twoCurrent.next = null;
             }
             current = currNext;
         }
-        zeroCurrent.next = node1.next;
-        oneCurrent.next = node2.next;
+        zeroCurrentLast.next = node1.next;
+        oneCurrentLast.next = node2.next;
         return node0.next;
     }
 
@@ -94,7 +94,6 @@ public class App04 {
                 // detach/delete the current node
                 prev.next = current.next;
                 Node temp = current;
-                temp.next = null;
                 current = prev.next;
 
                 // attach/insert the current node before root
@@ -111,7 +110,7 @@ public class App04 {
     public Node _33_segregate_even_odd_linked_list(Node node) {
         Node current = node;
         Node evenList = new Node();
-        Node evenListCurrent = evenList;
+        Node last = evenList;
         Node prev = null;
         while (current != null) {
             if (current == node) {
@@ -121,9 +120,10 @@ public class App04 {
             }
             Node currNext = current.next;
             if (current.data % 2 == 0) {
-                evenListCurrent.next = current;
+                last.next = current;
+                last = last.next;
+
                 current.next = null;
-                evenListCurrent = evenListCurrent.next;
 
                 prev.next = currNext;
                 current = currNext;
@@ -132,7 +132,7 @@ public class App04 {
             prev = current;
             current = currNext;
         }
-        evenListCurrent.next = node;
+        last.next = node;
         return evenList.next;
     }
 
@@ -143,7 +143,7 @@ public class App04 {
             node2 = temp;
         }
         Node root = node1;
-        Node result = root;
+        Node last = root;
         Node n1Next = null;
         Node n2Next = null;
         while (true) {
@@ -152,16 +152,20 @@ public class App04 {
             if (node1.data < node2.data) {
                 //result.append(n1.data);
                 n1Next = node1.next;
-                result.next = node1;
-                result = result.next;
-                result.next = null;
+
+                last.next = node1;
+                last = last.next;
+                last.next = null;
+
                 node1 = n1Next;
             } else if (node2.data < node1.data) {
                 // result.append(n2.data);
                 n2Next = node2.next;
-                result.next = node2;
-                result = result.next;
-                result.next = null;
+
+                last.next = node2;
+                last = last.next;
+                last.next = null;
+
                 node2 = n2Next;
             } else { // both values are same so add twice
                 // result.append(n2.data);
@@ -169,12 +173,14 @@ public class App04 {
 
                 n1Next = node1.next;
                 n2Next = node2.next;
-                result.next = node1;
-                result = result.next;
 
-                result.next = node2;
-                result = result.next;
-                result.next = null;
+                last.next = node1;
+                last = last.next;
+
+                last.next = node2;
+                last = last.next;
+                last.next = null;
+
                 node2 = n2Next;
                 node1 = n1Next;
             }
@@ -185,9 +191,9 @@ public class App04 {
                 return root;
             }
             n1Next = node1.next;
-            result.next = node1;
-            result = result.next;
-            result.next = null;
+            last.next = node1;
+            last = last.next;
+            last.next = null;
             node1 = n1Next;
         }
 
@@ -197,9 +203,9 @@ public class App04 {
                 return root;
             }
             n2Next = node2.next;
-            result.next = node2;
-            result = result.next;
-            result.next = null;
+            last.next = node2;
+            last = last.next;
+            last.next = null;
             node2 = n2Next;
         }
         // root = root.next;
