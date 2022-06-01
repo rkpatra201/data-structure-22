@@ -1,92 +1,96 @@
 package v1.linkedlist;
 
 
+import commons.DsUtils;
+import commons.Node;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.Stack;
 
 /**
  * Question 8-15 both inclusive
  */
 public class App02 {
-    int count = 0;
-    Node head;
 
-    static class Node {
-        Node next;
-        int data;
+    public static void main(String[] args){
 
-        public Node(int data) {
-            this.data = data;
+    }
+
+    public Node _8_add_1_to_number_represented_as_linkedList(Node node) {
+
+        Node afterAddingOne = null;
+        afterAddingOne = addOne(node);
+        // why afterAddingOne.next=null?
+        return afterAddingOne;
+    }
+
+
+    public Node _9_add_two_numbers_represented_as_linkedList(Node node1, Node node2){
+        Node res = null;
+        res = addTwoLists(node1, node2);
+        return  res;
+    }
+
+    private Node addTwoLists(Node list1, Node list2) {
+        // initializing result list
+        Node result = new Node();
+        int sum, carry = 0;
+        // creating 2 stacks
+        Stack<Integer> l1 = new Stack<>();
+        Stack<Integer> l2 = new Stack<>();
+
+        // adding list values to stacks
+        while (list1 != null){
+            l1.add(list1.data);
+            list1 = list1.next;
         }
-    }
-
-    private static void printLinkedList(Node node) {
-        while (node != null) {
-            System.out.print(node.data);
-            node = node.next;
-        }
-        System.out.println();
-    }
-
-    private static Node reverseLinkedList(Node head) {
-        Node prev = null, next = null;
-        Node curr = head;
-
-        while (curr != null) {
-            next = curr.next;
-            curr.next = prev;
-            prev = curr;
-            curr = next;
+        while (list2 != null){
+            l2.add(list2.data);
+            list2 = list2.next;
         }
 
-        head = prev;
-        return head;
-    }
-
-    public static void main(String[] args) {
-
-        // question - 8
-        _8_add_1_to_number_represented_as_linkedList();
-    }
-
-    private static void _17_check_linkedList_palindrome() {
-        Node head = new Node(9);
-        head.next = new Node(9);
-        head.next.next = new Node(9);
-        head.next.next.next = new Node(9);
-    }
-
-    private static void _8_add_1_to_number_represented_as_linkedList() {
-        Node head = new Node(9);
-        head.next = new Node(9);
-        head.next.next = new Node(9);
-        head.next.next.next = new Node(9);
-
-        printLinkedList(head);
-
-        head = reverseLinkedList(head);
-
-        head = addOne(head);
-
-        head = reverseLinkedList(head);
-
-        System.out.print("Reversed List is ");
-        printLinkedList(head);
+        // running loop untill both stacks empty
+        while (!(l1.isEmpty()) || !(l2.isEmpty()))
+        {
+            int a = 0, b = 0;
+            if (!(l1.isEmpty())){
+                a = l1.pop();
+            }
+            if (!(l2.isEmpty())){
+                b = l2.pop();
+            }
+            sum = a + b + carry;
+            result.append(sum % 10);
+            carry = sum/10;
+        }
+        // if still carry exists
+        if (carry != 0){
+            result.append(carry);
+        }
+        return result;
     }
 
     private static Node addOne(Node head) {
-        int carry = 1, sum;
-        Node res = head, temp = null;
-        while (head != null) {
-            sum = carry + head.data;
-            carry = (sum >= 10) ? 1 : 0;
-            sum = sum % 10;
-            head.data = sum;
-            temp = head;
+        Node res = new Node();
+        Node temp = head;
+        System.out.println();
+        int carry = 1, sum = 0;
+
+        while (head != null){
+            sum = temp.data + carry;
+            res.append(sum % 10);
             head = head.next;
+            carry = sum /10;
+
+            // update temp with latest value of head
+            temp = head;
         }
-        if (carry == 1) {
-            temp.next = new Node(carry);
+        if (carry != 0){
+            res.append(carry);
         }
+
         return res;
     }
 
