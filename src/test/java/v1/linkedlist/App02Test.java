@@ -20,7 +20,7 @@ public class App02Test {
     public void _8_add_1_to_number_represented_as_linkedList(){
         Node list = DsUtils.arrayToLinkedList(1, 2,3);
         Node reverse = list.reverse();
-        Node revResult = new App02()._8_add_1_to_number_represented_as_linkedList(reverse);
+        Node revResult = app02._8_add_1_to_number_represented_as_linkedList(reverse);
         Node res = revResult.reverse();
         System.out.println("Result : "+DsUtils.linkedListAsArray(res));
     }
@@ -29,7 +29,7 @@ public class App02Test {
     public void _9_add_two__numbers_represented_as_linkedList(){
         Node list1 = DsUtils.arrayToLinkedList(1,8,4);
         Node list2 = DsUtils.arrayToLinkedList(2,2,3);
-        Node res = new App02()._9_add_two_numbers_represented_as_linkedList(list1, list2);
+        Node res = app02._9_add_two_numbers_represented_as_linkedList(list1, list2);
         Node finalRes = res.reverse();
         System.out.println("Result : "+ DsUtils.linkedListAsArray(finalRes));
     }
@@ -37,7 +37,7 @@ public class App02Test {
     public void _9_add_two__numbers_represented_as_linkedList_l1_size_greater(){
         Node list1 = DsUtils.arrayToLinkedList(1,8,3,4,5,6,7);
         Node list2 = DsUtils.arrayToLinkedList(2,2,3, 4);
-        Node res = new App02()._9_add_two_numbers_represented_as_linkedList(list1, list2);
+        Node res = app02._9_add_two_numbers_represented_as_linkedList(list1, list2);
         Node finalRes = res.reverse();
         System.out.println("Result : "+ DsUtils.linkedListAsArray(finalRes));
     }
@@ -45,7 +45,7 @@ public class App02Test {
     public void _9_add_two__numbers_represented_as_linkedList_l2_size_greater(){
         Node list1 = DsUtils.arrayToLinkedList(1,8,3,4);
         Node list2 = DsUtils.arrayToLinkedList(2,2,3,4,5);
-        Node res = new App02()._9_add_two_numbers_represented_as_linkedList(list1, list2);
+        Node res = app02._9_add_two_numbers_represented_as_linkedList(list1, list2);
         Node finalRes = res.reverse();
         System.out.println("Result : "+ DsUtils.linkedListAsArray(finalRes));
     }
@@ -54,7 +54,7 @@ public class App02Test {
     public void _10_intersection_of_two_sorted_linkedLists(){
         Node list1 = DsUtils.arrayToLinkedList(1,8,9,14, 25, 50);
         Node list2 = DsUtils.arrayToLinkedList(2,8,9,14,50);
-        Node res = new App02()._10_intersection_of_two_sorted_linkedLists(list1, list2);
+        Node res = app02._10_intersection_of_two_sorted_linkedLists(list1, list2);
         System.out.println("Result : "+ DsUtils.linkedListAsArray(res));
     }
 
