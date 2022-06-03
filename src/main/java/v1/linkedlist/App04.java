@@ -85,6 +85,7 @@ public class App04 {
     }
 
 
+
     public Node _33_segregate_even_odd_linked_list_1(Node root) {
 
         Node prev = null;
