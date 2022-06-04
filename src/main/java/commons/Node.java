@@ -47,6 +47,9 @@ public class Node {
     public List<Integer> asArray() {
         return DsUtils.linkedListAsArray(this);
     }
+    public List<Integer> asArray_1() {
+        return DsUtils.linkedListAsArray_1(this);
+    }
 
     public Node reverse() {
         // 1, 2, 3, 4, 5

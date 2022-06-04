@@ -34,6 +34,21 @@ public class DsUtils {
         }
         return list;
     }
+    public static List<Integer> linkedListAsArray_1(Node node) {
+        Node last = node.last;
+        Node temp = node;
+        Node head = node;
+        List<Integer> list = new ArrayList<>();
+        while (temp.next != head) {
+            list.add(temp.data);
+            if (last == temp) {
+                break;
+            }
+            temp = temp.next;
+        }
+        list.add(temp.data);
+        return list;
+    }
 
     public static void iterateOverLinkedList(Node node) {
         if (node == null)
