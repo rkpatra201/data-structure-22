@@ -4,10 +4,7 @@ package v1.linkedlist;
 import commons.DsUtils;
 import commons.Node;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * Question 8-15 both inclusive
@@ -37,6 +34,90 @@ public class App02 {
         Node res = null;
         res = intersection(node1,node2);
         return res;
+    }
+
+    public Node _11_intersection_point_of_two_linkedLists(Node node1, Node node2){
+        Node res = null;
+        res = intersectionPointOfNodes(node1,node2);
+        if (res == null){
+            System.out.println("No intersection point found");
+        }
+        return res;
+    }
+
+    public Node _12_sort_list_using_mergeSort(Node node){
+         Node res;
+         res = mergeSortLinkedList(node);
+         return res;
+    }
+
+    private Node mergeSortLinkedList(Node node) {
+        if ((node == null) || (node.next == null)){
+            return node;
+        }
+        Node middle = getMiddle(node);
+
+        Node middleNext = middle.next;
+
+        middle.next = null;
+
+        Node left = mergeSortLinkedList(node);
+        Node right = mergeSortLinkedList(middleNext);
+
+
+        Node sortedList = mergeSort(left, right);
+
+        return sortedList;
+
+
+    }
+
+    private Node mergeSort(Node left, Node right) {
+        Node res = null;
+
+        if (left == null)
+            return right;
+        if (right == null)
+            return left;
+
+        if (left.data <= right.data){
+            res = left;
+            res.next = mergeSort(left.next, right);
+        } else {
+            res = right;
+            res.next = mergeSort(left, right.next);
+        }
+
+        return res;
+    }
+
+    private Node getMiddle(Node node) {
+        Node fast = node, slow = node;
+
+        while ((fast.next != null) && (fast.next.next != null))
+        {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
+    }
+
+
+    private Node intersectionPointOfNodes(Node node1, Node node2) {
+        HashSet<Node> hs = new HashSet<>();
+        while (node1 != null){
+            hs.add(node1);
+            node1 =node1.next;
+        }
+
+        while (node2 != null){
+            if (hs.contains(node2)){
+//                System.out.println(node2);
+                return  node2;
+            }
+            node2 = node2.next;
+        }
+        return null;
     }
 
     private Node intersection(Node node1, Node node2) {
