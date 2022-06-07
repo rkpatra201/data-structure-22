@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class App04Test {
 
     private App04 app04;
@@ -23,5 +21,60 @@ class App04Test {
         TreeNode treeNode = DsUtils.getDefaultTree();
         List<Integer> values = app04._01_levelOrderTraversal(treeNode);
         System.out.println(values);
+    }
+
+    @Test
+    void findPathFromRootToNode() {
+        TreeNode treeNode = DsUtils.getDefaultTree();
+        List<TreeNode> path = app04.findPathFromRootToNode(treeNode, 80);
+        path.stream().forEach(e -> {
+            System.out.println(e.data);
+        });
+    }
+
+    @Test
+    void findLowestCommonAncestor() {
+        TreeNode treeNode = DsUtils.getDefaultTree();
+        TreeNode treeNode1 = app04._30_findLowestCommonAncestor(treeNode, 60, 800);
+        if (treeNode1 != null) System.out.println(treeNode1.data);
+    }
+
+    @Test
+    void _02_reverseLevelOrderTraversal() {
+        TreeNode treeNode = DsUtils.getDefaultTree();
+        List<Integer> list = app04._01_levelOrderTraversal(treeNode);
+        System.out.println(list);
+        list = app04._02_reverseLevelOrderTraversal(treeNode);
+        System.out.println(list);
+    }
+
+    @Test
+    void _03_heightOfTheTree() {
+        TreeNode treeNode = DsUtils.getDefaultTree();
+        int height = app04._03_heightOfTheTree(treeNode);
+        treeNode = DsUtils.getDefaultTree();
+        int height1 = app04._03_heightOfTheTree_Rec(treeNode);
+        System.out.println(height == height1);
+    }
+
+    @Test
+    void _24_checkMirrorTree() {
+        TreeNode treeNode = DsUtils.getDefaultTree();
+        TreeNode mirrorTree = DsUtils.toMirrorTree(treeNode);
+        treeNode = DsUtils.getDefaultTree();
+        boolean flag = app04._24_checkMirrorTree(treeNode, mirrorTree);
+        System.out.println(flag);
+    }
+
+    @Test
+    void _12_levelOrderDeQueueZigZagTraversal() {
+        TreeNode treeNode = DsUtils.getDefaultTree();
+        app04._12_levelOrderDeQueueZigZagTraversal(treeNode);
+    }
+
+    @Test
+    void _13_balancedBst() {
+        TreeNode treeNode = DsUtils.getDefaultTree();
+        System.out.println(app04._13_balancedBst(treeNode));
     }
 }

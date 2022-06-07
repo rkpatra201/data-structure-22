@@ -60,7 +60,7 @@ public class DsUtils {
         return root;
     }
 
-    public TreeNode toMirrorTree(TreeNode node) {
+    public static TreeNode toMirrorTree(TreeNode node) {
         if (node == null)
             return null;
         TreeNode left = toMirrorTree(node.left);
