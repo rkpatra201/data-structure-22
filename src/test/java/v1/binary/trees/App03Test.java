@@ -75,4 +75,28 @@ public class App03Test {
         System.out.println();
         app03._08_postorderTraversalWithoutRecurtion(root);
     }
+    @Test
+    void _09_leftView(){
+        TreeNode root = DsUtils.getDefaultTree();
+        app03._09_leftView_1(root);
+        System.out.println();
+        app03._09_leftView(root);
+    }
+    @Test
+    void _10_rightView(){
+        TreeNode root = DsUtils.getDefaultTree();
+        app03._10_rightView(root);
+        System.out.println();
+        app03._10_rightView_1(root);
+    }
+    @Test
+    void _11_topView(){
+        TreeNode root = DsUtils.getDefaultTree();
+       app03._11_topView(root);
+    }
+    @Test
+    void _12_bottomView(){
+        TreeNode root = DsUtils.getDefaultTree();
+        app03._12_bottomView(root);
+    }
 }

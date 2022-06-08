@@ -2,13 +2,14 @@ package v1.binary.trees;
 
 import commons.TreeNode;
 
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.*;
 
 // Question 21 - 30 both inclusive
 public class App03 {
     int maxDiameter = 0;
+    int max_value = 0;
+    List<Integer> left = new ArrayList<>();
+    List<Integer> right = new ArrayList<>();
 
     void _01_levelOrderTraversal(TreeNode node) {
         Queue<TreeNode> queue = new LinkedList<>();
@@ -130,6 +131,7 @@ public class App03 {
             if (temp.right != null) s.push(temp.right);
             if (temp.left != null) s.push(temp.left);
         }
+
     }
 
     void _08_postorderTraversalWithRecurtion(TreeNode root) {
@@ -152,5 +154,128 @@ public class App03 {
         }
         while (!s2.isEmpty()) System.out.print(s2.pop().data + " ");
     }
+
+    void _09_leftView(TreeNode root) {
+        leftView(root, 1);
+        max_value = 0;
+    }
+
+    private void leftView(TreeNode root, int level) {
+        if (root == null) return;
+        if (max_value < level) {
+            System.out.print(root.data + " ");
+            max_value = level;
+        }
+        leftView(root.left, level + 1);
+        leftView(root.right, level + 1);
+    }
+
+    void _09_leftView_1(TreeNode root) {
+        Queue<TreeNode> q = new LinkedList<>();
+        if (root == null) return;
+        q.add(root);
+        while (!q.isEmpty()) {
+            int size = q.size();
+            System.out.print(q.peek().data + " ");     // O(n) or O(n^2)
+            while (size-- > 0) {
+                TreeNode temp = q.poll();
+                if (temp.left != null) q.add(temp.left);
+                if (temp.right != null) q.add(temp.right);
+            }
+        }
+    }
+
+    void _10_rightView(TreeNode root) {
+        rightView(root, 1);
+    }
+
+    private void rightView(TreeNode root, int level) {
+        if (root == null) return;
+        if (max_value < level) {
+            System.out.print(root.data + " ");
+            max_value = level;
+        }
+        rightView(root.right, level + 1);
+        rightView(root.left, level + 1);
+    }
+
+    void _10_rightView_1(TreeNode root) {
+        Queue<TreeNode> q = new LinkedList<>();
+        if (root == null) return;
+        q.add(root);
+        while (!q.isEmpty()) {
+            int size = q.size();
+            System.out.print(q.peek().data + " ");     // O(n) or O(n^2)
+            while (size-- > 0) {
+                TreeNode temp = q.poll();
+                if (temp.right != null) q.add(temp.right);
+                if (temp.left != null) q.add(temp.left);
+            }
+        }
+    }
+
+    //    void _11_topView(TreeNode root) {
+//          left(root.left);
+//          right(root);
+//           Collections.reverse(left);
+//        for (int x : left) System.out.print(x + " ");
+//        for (int x : right) System.out.print(x + " ");
+//    }
+//
+//    private void  left(TreeNode root) {
+//        if (root==null) return;
+//        left.add(root.data);
+//        left(root.left);
+//    }
+//
+//    private void right(TreeNode root) {
+//        if(root== null) return ;
+//        right.add(root.data);
+//        right(root.right);
+//    }
+    void _11_topView(TreeNode root) {
+        Map<Integer, Integer> map = new TreeMap<>();
+        Queue<TreeNode> q = new LinkedList<>();
+        if (root == null) return;
+        else q.add(root);
+        while (!q.isEmpty()) {
+            TreeNode temp = q.poll();
+            if (!map.containsKey(temp.hd)) map.put(temp.hd, temp.data);
+            if (temp.left != null) {
+                temp.left.hd = temp.hd - 1;
+                q.add(temp.left);
+            }
+            if (temp.right != null) {
+                temp.right.hd = temp.hd + 1;
+                q.add(temp.right);
+            }
+        }
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            System.out.print(entry.getValue()+" ");
+        }
+    }
+    void _12_bottomView(TreeNode root){
+        Map<Integer, Integer> map = new TreeMap<>();
+        Queue<TreeNode> q = new LinkedList<>();
+        if (root == null) return;
+        else q.add(root);
+        while (!q.isEmpty()) {
+            TreeNode temp = q.poll();
+             map.put(temp.hd, temp.data);
+            if (temp.left != null) {
+                temp.left.hd = temp.hd - 1;
+                q.add(temp.left);
+            }
+            if (temp.right != null) {
+                temp.right.hd = temp.hd + 1;
+                q.add(temp.right);
+            }
+        }
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            System.out.print(entry.getValue()+" ");
+        }
+
+    }
+
 }
 
