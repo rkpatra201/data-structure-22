@@ -222,22 +222,26 @@ public class App04 {
 
         queue.add(treeNode);
         queue.add(null);
-        boolean leftView_FirstNodeInLevel=true;
+        list.add(treeNode.data);
+//        boolean leftView_FirstNodeInLevel=true;
         while (!queue.isEmpty()) {
             TreeNode polledNode = queue.poll();
             if (polledNode == null) {
-                leftView_FirstNodeInLevel = true;
+//                leftView_FirstNodeInLevel = true;
                 queue.add(null);
                 if (queue.peek() == null)
                     break;
+                else{
+                    list.add(queue.peek().data);
+                }
                 continue;
             }
-            if(leftView_FirstNodeInLevel)
-            {
-                System.out.println(polledNode.data);
-                leftView_FirstNodeInLevel = false;
-                list.add((polledNode.data));
-            }
+//            if(leftView_FirstNodeInLevel)
+//            {
+//                System.out.println(polledNode.data);
+//                leftView_FirstNodeInLevel = false;
+//                list.add((polledNode.data));
+//            }
            // System.out.println(polledNode.data);
             TreeNode right = polledNode.right;
             TreeNode left = polledNode.left;
