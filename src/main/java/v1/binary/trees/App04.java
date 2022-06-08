@@ -202,4 +202,15 @@ public class App04 {
         return false;
 
     }
+
+    public void findAllLeafNodes(TreeNode treeNode, List<Integer> leafNodes)
+    {
+        if(treeNode == null)
+            return;
+
+        if(treeNode.left == null && treeNode.right == null)
+            leafNodes.add(treeNode.data);
+        findAllLeafNodes(treeNode.left, leafNodes);
+        findAllLeafNodes(treeNode.right, leafNodes);
+    }
 }

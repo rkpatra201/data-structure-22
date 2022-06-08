@@ -5,6 +5,7 @@ import commons.TreeNode;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 class App04Test {
@@ -76,5 +77,13 @@ class App04Test {
     void _13_balancedBst() {
         TreeNode treeNode = DsUtils.getDefaultTree();
         System.out.println(app04._13_balancedBst(treeNode));
+    }
+
+    @Test
+    void findAllLeafNodes() {
+        TreeNode treeNode = DsUtils.getDefaultTree();
+        List<Integer> leafNodes = new ArrayList<>();
+        app04.findAllLeafNodes(treeNode, leafNodes);
+        System.out.println(leafNodes);
     }
 }
