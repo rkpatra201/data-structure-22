@@ -86,4 +86,18 @@ class App04Test {
         app04.findAllLeafNodes(treeNode, leafNodes);
         System.out.println(leafNodes);
     }
+
+    @Test
+    void leftViewOfTree() {
+        TreeNode treeNode = DsUtils.getDefaultTree();
+        List<Integer> result = app04._08_leftViewOfTree(treeNode);
+        System.out.println(result);
+    }
+
+    @Test
+    void rightViewOfTree() {
+        TreeNode treeNode = DsUtils.getDefaultTree();
+        List<Integer> result = app04._09_rightViewOfTree(treeNode);
+        System.out.println(result);
+    }
 }

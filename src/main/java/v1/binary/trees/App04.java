@@ -213,4 +213,71 @@ public class App04 {
         findAllLeafNodes(treeNode.left, leafNodes);
         findAllLeafNodes(treeNode.right, leafNodes);
     }
+
+    public List<Integer> _08_leftViewOfTree(TreeNode treeNode){
+        // code copied form levelOrderTraversal
+
+        List<Integer> list = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+
+        queue.add(treeNode);
+        queue.add(null);
+        boolean leftView_FirstNodeInLevel=true;
+        while (!queue.isEmpty()) {
+            TreeNode polledNode = queue.poll();
+            if (polledNode == null) {
+                leftView_FirstNodeInLevel = true;
+                queue.add(null);
+                if (queue.peek() == null)
+                    break;
+                continue;
+            }
+            if(leftView_FirstNodeInLevel)
+            {
+                System.out.println(polledNode.data);
+                leftView_FirstNodeInLevel = false;
+                list.add((polledNode.data));
+            }
+           // System.out.println(polledNode.data);
+            TreeNode right = polledNode.right;
+            TreeNode left = polledNode.left;
+
+            if (left != null)
+                queue.add(left);
+            if (right != null)
+                queue.add(right);
+        }
+        return list;
+    }
+
+    public List<Integer> _09_rightViewOfTree(TreeNode treeNode){
+        // code copied form levelOrderTraversal
+
+        TreeNode prevNode=null;
+        List<Integer> list = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+
+        queue.add(treeNode);
+        queue.add(null);
+        while (!queue.isEmpty()) {
+            TreeNode polledNode = queue.poll();
+            if (polledNode == null) {
+                list.add(prevNode.data);
+                queue.add(null);
+                if (queue.peek() == null)
+                    break;
+                continue;
+            }
+            prevNode = polledNode;
+            // System.out.println(polledNode.data);
+            TreeNode right = polledNode.right;
+            TreeNode left = polledNode.left;
+
+            if (left != null)
+                queue.add(left);
+            if (right != null)
+                queue.add(right);
+        }
+        return list;
+    }
 }
