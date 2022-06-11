@@ -77,7 +77,14 @@ class App04Test {
     @Test
     void _13_balancedBst() {
         TreeNode treeNode = DsUtils.getDefaultTree();
-        System.out.println(app04._13_balancedBst(treeNode));
+        System.out.println(app04._13_verifyBalancedBst(treeNode));
+    }
+
+    @Test
+    void _13_balancedBst_1() {
+        TreeNode treeNode = DsUtils.getDefaultTree();
+        int x = app04._13_verifyBalancedBst_1(treeNode);
+        Assertions.assertTrue(x != -1);
     }
 
     @Test
@@ -130,9 +137,9 @@ class App04Test {
         root2.left = root5;
         root2.right = root6;
 
-        int result = app04.verifySumTree(root);
+        int result = app04._21_verifySumTree(root);
         System.out.println(result);
-        Assertions.assertTrue(result!=-1);
+        Assertions.assertTrue(result != -1);
     }
 
     @Test
@@ -154,8 +161,8 @@ class App04Test {
         root2.left = root5;
         root2.right = root6;
 
-        int result = app04.verifySumTree(root);
+        int result = app04._21_verifySumTree(root);
         System.out.println(result);
-        Assertions.assertFalse(result!=-1);
+        Assertions.assertFalse(result != -1);
     }
 }

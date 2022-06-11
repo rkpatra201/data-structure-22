@@ -193,7 +193,7 @@ public class App04 {
         }
     }
 
-    public boolean _13_balancedBst(TreeNode treeNode) {
+    public boolean _13_verifyBalancedBst(TreeNode treeNode) {
         if (treeNode == null)
             return true;
 
@@ -202,11 +202,37 @@ public class App04 {
 
         int heightDiff = Math.abs(leftHeight - rightHeight);
 
-        if (heightDiff <= 1 && _13_balancedBst(treeNode.left) && _13_balancedBst(treeNode.right))
+        // heightDiff: 0 or 1
+        if (heightDiff <= 1 && _13_verifyBalancedBst(treeNode.left) && _13_verifyBalancedBst(treeNode.right))
             return true;
 
         return false;
 
+    }
+
+    // abs(left-right) = 0 or 1
+    // return -1: not balanced
+    public int _13_verifyBalancedBst_1(TreeNode currentNode) {
+        if (currentNode == null) {
+            return 0;
+        }
+
+        // checking left subtree
+        int leftSubtreeHeight = _13_verifyBalancedBst_1(currentNode.left);
+        if (leftSubtreeHeight == -1) return -1;
+        // if left subtree is not balanced then the entire tree is also not balanced
+
+        //checking right subtree
+        int rightSubtreeHeight = _13_verifyBalancedBst_1(currentNode.right);
+        if (rightSubtreeHeight == -1) return -1;
+        // if right subtree is not balanced then the entire          tree is also not balanced
+
+        //checking the difference of left and right subtree for current node
+        if (Math.abs(leftSubtreeHeight - rightSubtreeHeight) > 1) {
+            return -1;
+        }
+        //if it is balanced then return the height
+        return Math.max(leftSubtreeHeight, rightSubtreeHeight) + 1;
     }
 
     public void findAllLeafNodes(TreeNode treeNode, List<Integer> leafNodes) {
@@ -219,6 +245,14 @@ public class App04 {
         findAllLeafNodes(treeNode.right, leafNodes);
     }
 
+    /**
+     * intention: print first node of level
+     * do level order traversal.
+     * on encountering null peek next value
+     *
+     * @param treeNode
+     * @return
+     */
     public List<Integer> _08_leftViewOfTree(TreeNode treeNode) {
         // code copied form levelOrderTraversal
 
@@ -259,6 +293,11 @@ public class App04 {
         return list;
     }
 
+    /**
+     * intention: print last node of level
+     * do level order traversal
+     * keep track of prev node and print it on encountering null value
+     */
     public List<Integer> _09_rightViewOfTree(TreeNode treeNode) {
         // code copied form levelOrderTraversal
 
@@ -307,19 +346,19 @@ public class App04 {
         return result;
     }
 
-    public int verifySumTree(TreeNode treeNode) {
+    public int _21_verifySumTree(TreeNode treeNode) {
         if (treeNode == null)
             return 0;
         if (treeNode.left == null && treeNode.right == null)
-            return treeNode.data;
+            return treeNode.data; // otherwise -ve will be returned
 
-        int data = verifySumTree(treeNode.left) +
-                verifySumTree(treeNode.right);
+        int data = _21_verifySumTree(treeNode.left) +
+                _21_verifySumTree(treeNode.right);
 
         int current = treeNode.data;
 
         if (current == data)
             return 2 * current; // why this? current(5) + left(3) + right(2) =root(10) = 2 * current
-        return -1;
+        return -1;// we are assuming -1 is not node value
     }
 }
