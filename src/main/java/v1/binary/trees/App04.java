@@ -210,7 +210,7 @@ public class App04 {
 
     }
 
-    // abs(left-right) = 0 or 1
+    // balanced tree abs(h(left-right)) = 0 or 1
     // return -1: not balanced
     public int _13_verifyBalancedBst_1(TreeNode currentNode) {
         if (currentNode == null) {
