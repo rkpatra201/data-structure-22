@@ -2,6 +2,7 @@ package v1.binary.trees;
 
 import commons.DsUtils;
 import commons.TreeNode;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -99,5 +100,62 @@ class App04Test {
         TreeNode treeNode = DsUtils.getDefaultTree();
         List<Integer> result = app04._09_rightViewOfTree(treeNode);
         System.out.println(result);
+    }
+
+    @Test
+    void convertToSumTree() {
+        TreeNode treeNode = DsUtils.getDefaultTree();
+        app04._01_levelOrderTraversal(treeNode);
+        System.out.println("======");
+        app04._18_convertToSumTree(treeNode);
+        app04._01_levelOrderTraversal(treeNode);
+    }
+
+    @Test
+    void verifySumTree_1() {
+        TreeNode root = new TreeNode(44);
+        TreeNode root1 = new TreeNode(9);
+        TreeNode root2 = new TreeNode(13);
+        TreeNode root3 = new TreeNode(4);
+        TreeNode root4 = new TreeNode(5);
+        TreeNode root5 = new TreeNode(6);
+        TreeNode root6 = new TreeNode(7);
+
+        root.left = root1;
+        root.right = root2;
+
+        root1.left = root3;
+        root1.right = root4;
+
+        root2.left = root5;
+        root2.right = root6;
+
+        int result = app04.verifySumTree(root);
+        System.out.println(result);
+        Assertions.assertTrue(result!=-1);
+    }
+
+    @Test
+    void verifySumTree_2() {
+        TreeNode root = new TreeNode(44);
+        TreeNode root1 = new TreeNode(9);
+        TreeNode root2 = new TreeNode(13);
+        TreeNode root3 = new TreeNode(4);
+        TreeNode root4 = new TreeNode(5);
+        TreeNode root5 = new TreeNode(6);
+        TreeNode root6 = new TreeNode(9);
+
+        root.left = root1;
+        root.right = root2;
+
+        root1.left = root3;
+        root1.right = root4;
+
+        root2.left = root5;
+        root2.right = root6;
+
+        int result = app04.verifySumTree(root);
+        System.out.println(result);
+        Assertions.assertFalse(result!=-1);
     }
 }

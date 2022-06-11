@@ -3,7 +3,6 @@ package v1.binary.trees;
 import commons.TreeNode;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 // Question 31 - 34 both inclusive
 public class App04 {
@@ -147,6 +146,13 @@ public class App04 {
         return n1.data == n2.data && _24_checkMirrorTree(n1.left, n2.right) && _24_checkMirrorTree(n1.right, n2.left);
     }
 
+    public boolean _identicalTree(TreeNode n1, TreeNode n2) {
+        if (n1 == null && n2 == null)
+            return true;
+
+        return n1.data == n2.data && _identicalTree(n1.left, n2.left) && _identicalTree(n1.right, n2.right);
+    }
+
     public void _12_levelOrderDeQueueZigZagTraversal(TreeNode treeNode) {
 
         Deque<TreeNode> queue = new LinkedList<>();
@@ -203,18 +209,17 @@ public class App04 {
 
     }
 
-    public void findAllLeafNodes(TreeNode treeNode, List<Integer> leafNodes)
-    {
-        if(treeNode == null)
+    public void findAllLeafNodes(TreeNode treeNode, List<Integer> leafNodes) {
+        if (treeNode == null)
             return;
 
-        if(treeNode.left == null && treeNode.right == null)
+        if (treeNode.left == null && treeNode.right == null)
             leafNodes.add(treeNode.data);
         findAllLeafNodes(treeNode.left, leafNodes);
         findAllLeafNodes(treeNode.right, leafNodes);
     }
 
-    public List<Integer> _08_leftViewOfTree(TreeNode treeNode){
+    public List<Integer> _08_leftViewOfTree(TreeNode treeNode) {
         // code copied form levelOrderTraversal
 
         List<Integer> list = new ArrayList<>();
@@ -231,7 +236,7 @@ public class App04 {
                 queue.add(null);
                 if (queue.peek() == null)
                     break;
-                else{
+                else {
                     list.add(queue.peek().data);
                 }
                 continue;
@@ -242,7 +247,7 @@ public class App04 {
 //                leftView_FirstNodeInLevel = false;
 //                list.add((polledNode.data));
 //            }
-           // System.out.println(polledNode.data);
+            // System.out.println(polledNode.data);
             TreeNode right = polledNode.right;
             TreeNode left = polledNode.left;
 
@@ -254,10 +259,10 @@ public class App04 {
         return list;
     }
 
-    public List<Integer> _09_rightViewOfTree(TreeNode treeNode){
+    public List<Integer> _09_rightViewOfTree(TreeNode treeNode) {
         // code copied form levelOrderTraversal
 
-        TreeNode prevNode=null;
+        TreeNode prevNode = null;
         List<Integer> list = new ArrayList<>();
         Queue<TreeNode> queue = new LinkedList<>();
 
@@ -283,5 +288,38 @@ public class App04 {
                 queue.add(right);
         }
         return list;
+    }
+
+    /**
+     * sum tree:
+     *
+     * @param treeNode
+     * @return
+     */
+    public int _18_convertToSumTree(TreeNode treeNode) {
+        if (treeNode == null)
+            return 0;
+        int oldData = treeNode.data;
+
+        treeNode.data = _18_convertToSumTree(treeNode.left) + _18_convertToSumTree(treeNode.right);
+        int result = treeNode.data + oldData;
+
+        return result;
+    }
+
+    public int verifySumTree(TreeNode treeNode) {
+        if (treeNode == null)
+            return 0;
+        if (treeNode.left == null && treeNode.right == null)
+            return treeNode.data;
+
+        int data = verifySumTree(treeNode.left) +
+                verifySumTree(treeNode.right);
+
+        int current = treeNode.data;
+
+        if (current == data)
+            return 2 * current; // why this? current(5) + left(3) + right(2) =root(10) = 2 * current
+        return -1;
     }
 }
