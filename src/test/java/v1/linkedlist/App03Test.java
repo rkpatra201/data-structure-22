@@ -62,17 +62,20 @@ public class App03Test {
     } @Test
     void _22_sort_a_k_sorted_doubly_linkedlist(){
         Node node = DsUtils.buildDoubleLinkedList(1, 2, 3, 4, 5, 0, 9, 8);
-        Node res= app03._22_sort_a_k_sorted_doubly_linkedlist(node);
+        Node res= app03._22_sort_a_k_sorted_doubly_linkedlist(node,3);
         System.out.println("result " + res.asArray());
     } @Test
-    void _23_rotate_double_linkedlist_by_n_nodes(){
+    void _23_rotate_doubly_linkedlist_by_n_nodes(){
         Node node = DsUtils.buildDoubleLinkedList(1, 2, 3, 4, 5, 0, 9, 8);
-        Node res= app03._23_rotate_double_linkedlist_by_n_nodes(node);
+        Node node1 = DsUtils.buildDoubleLinkedList(1, 2, 3);
+        Node res= app03._23_rotate_doubly_linkedlist_by_n_nodes(node,3);
+        Node res1 = app03._23_rotate_doubly_linkedlist_by_n_nodes(node1,3);
         System.out.println("result " + res.asArray());
+        System.out.println("result " + res1.asArray());
     } @Test
     void _24_rotate_double_linkedlist_in_a_group_of_given_size(){
         Node node = DsUtils.buildDoubleLinkedList(1, 2, 3, 4, 5, 0, 9, 8);
-        Node res= app03._24_rotate_double_linkedlist_in_a_group_of_given_size(node);
+        Node res= app03._24_rotate_double_linkedlist_in_a_group_of_given_size( node,3);
         System.out.println("result " + res.asArray());
     }
 

@@ -173,14 +173,78 @@ public class App03
                         count++;
         return count;
     }
-    public Node _22_sort_a_k_sorted_doubly_linkedlist(Node head){
-     return head;
-    }
-    public Node _23_rotate_double_linkedlist_by_n_nodes(Node head){
+    public Node _22_sort_a_k_sorted_doubly_linkedlist(Node head,int a){
+        if(head==null || head.next==null)
+        return head ;
+        for(Node i=head.next;i!=null;i=i.next){
+            Node j=i;
+            while(j.prev !=null && j.data <j.prev.data){
+                Node temp =j.prev.prev;
+                Node temp2=j.prev;
+                Node temp3=j.next;
+                j.prev.next=temp3;
+                j.prev.prev=j;
+                j.prev=temp;
+                j.next=temp2;
+                if(temp!=null)
+                    temp.next=j;
+                if(temp3 != null)
+                    temp3.prev=temp2;
+
+            }
+            if(j.prev==null)
+                head =j;
+        }
         return head;
 
+
     }
-    public Node _24_rotate_double_linkedlist_in_a_group_of_given_size(Node head){
+    public Node _23_rotate_doubly_linkedlist_by_n_nodes(Node head,int N){
+        if (N ==0)
+            return head;
+        Node current =head;
+        int count =1 ;
+        while(count < N &&  current !=null){
+            current =current.next;
+            count++;
+        }
+        if(current ==null)
+            return head;
+        Node NthNode=current ;
+        while(current.next != null)
+            current =current.next;
+        current .next =head;
+        (head).prev =current ;
+        head =NthNode .next;
+        (head).prev =null;
+        NthNode .next =null;
+        return head ;
+    }
+    public Node _24_rotate_double_linkedlist_in_a_group_of_given_size(Node head,int m){
+        Node current = head;
+        Node newHead =null;
+        Node next =null;
+        int count = 0 ;
+        while (current !=null && count < m){
+            next =current.next;
+            newHead= push(newHead,current);
+            current =next;
+            count ++;
+        }
+        if(next !=null){
+            head.next =_24_rotate_double_linkedlist_in_a_group_of_given_size(next,m);
+            head.next.prev =head;
+        }
+       return newHead ;
+
+    }
+    //
+    static Node push(Node head,Node new_node) {
+        new_node.prev = null;
+        new_node.next = head;
+        if(head != null)
+            head.prev =new_node;
+        head= new_node ;
         return head;
 
     }
