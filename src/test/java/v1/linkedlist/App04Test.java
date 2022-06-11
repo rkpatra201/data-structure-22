@@ -131,24 +131,5 @@ class App04Test {
 //        System.out.println("result: "+node.asArray());
 //    }
 
-    @Test
-    void _27_flatten_a_linkedlist(){
-        Node node = DsUtils.arrayToLinkedList(1, 2, 3, 4, 5, 9, 8);
-        app04._27_flatten_a_linkedlist(node);
-    }
-    @Test
-    void _30_merge_k_sorted_linkedlist(){
-//        Node node1 = DsUtils.arrayToLinkedList(1, 2, 2, 1, 0, 1, 0);
-//        Node node2 = DsUtils.arrayToLinkedList(1, 2, 2, 1, 0, 1, 0);
-//        Node node3 = DsUtils.arrayToLinkedList(1, 2, 2, 1, 0, 1, 0);
-//
-//        Node res = app04._30_merge_k_sorted_linkedlist(node1);
-//        System.out.println("result :"+res.asArray());
-    }
-    @Test
-    void _28_sort_a_linkedlist_of_0s_1s_2s(){
-        Node node = DsUtils.arrayToLinkedList(1, 2, 2, 1, 0, 1, 0);
-        Node res = app04._28_sort_a_linkedlist_of_0s_1s_2s(node);
-        System.out.println("result :"+res.asArray());
-    }
+
 }
