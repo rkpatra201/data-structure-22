@@ -85,6 +85,7 @@ public class App04 {
     }
 
 
+
     public Node _33_segregate_even_odd_linked_list_1(Node root) {
 
         Node prev = null;
@@ -211,6 +212,86 @@ public class App04 {
         // root = root.next;
         System.out.println("r: " + root.asArray());
         return root;
+    }
+
+
+    public Node _32_deleteNodesWhichHaveGreaterValueOnRight(Node root) {
+
+        // input : 10, 20 , 5, 4, 3, 11
+        // output: 20, 11
+
+        /**
+         * explanation: 10 deleted as 20 is large value present in right of 10
+         *    3 deleted as 11 is present at right
+         *    4 deleted as 11 is present at right
+         *    5 deleted as 11 is present at right
+         */
+
+
+        /**
+         * approach:
+         *  reverse the list
+         *  that means we can traverse from back and keep linking and updating the max values one by one with a tempNode as root.
+         *  reverse the tempNode for retain the input order
+         */
+
+        /**
+         *  input: 10, 20 , 5, 4, 3, 11
+         *  reverse: 11, 3, 4, 5, 20, 10
+         *  tempNode: 11 max, 20 max
+         *  reverse tempNode: 20 - 11
+         */
+
+        /**
+         *  input: 10, 200, 70, 14, 40, 26, 50
+         *  reverse: 50, 26, 40, 14, 70, 200
+         *  tempNode: 50, 70, 200
+         *  reverse tempNode: 200 , 70, 50
+         */
+
+        Node reverseRoot = root.reverse();
+
+        Node tempNode = new Node();
+        Node tempNodeLast = tempNode;
+        int maxValue = -1;
+
+        Node current = reverseRoot;
+        while (current != null) {
+            Node currNext = current.next;
+            if (current.data > maxValue) {
+                current.next = null;
+
+                maxValue = current.data;
+                tempNodeLast.next = current;
+                tempNodeLast = tempNodeLast.next;
+            }
+            current = currNext;
+        }
+
+        Node newRoot = tempNode.next;
+        newRoot.root = newRoot;
+        return newRoot.reverse();
+    }
+
+    public int _31_multiply_LinkedList(Node root1, Node root2) {
+        Node n1 = root1.reverse();
+        Node n2 = root2.reverse();
+        int v1 = 0;
+        int v2 = 0;
+        Node current = n1;
+        int i = 0;
+        while (current != null) {
+            v1 = (int) (v1 + Math.pow(10, i++) * current.data);
+            current = current.next;
+        }
+
+        current = n2;
+        i = 0;
+        while (current != null) {
+            v2 = (int) (v2 + Math.pow(10, i++) * current.data);
+            current = current.next;
+        }
+        return v1 * v2;
     }
 
 //    private Node merge_LinkedList_And_Sort(Node n1, Node n2, boolean isResultNodeN1) {

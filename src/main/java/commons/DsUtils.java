@@ -34,6 +34,21 @@ public class DsUtils {
         }
         return list;
     }
+    public static List<Integer> linkedListAsArray_1(Node node) {
+        Node last = node.last;
+        Node temp = node;
+        Node head = node;
+        List<Integer> list = new ArrayList<>();
+        while (temp.next != head) {
+            list.add(temp.data);
+            if (last == temp) {
+                break;
+            }
+            temp = temp.next;
+        }
+        list.add(temp.data);
+        return list;
+    }
 
     public static void iterateOverLinkedList(Node node) {
         if (node == null)
@@ -57,6 +72,57 @@ public class DsUtils {
         for (int i = 1; i < arr.length; i++) {
             root.appendDll(arr[i]);
         }
+        return root;
+    }
+
+    public TreeNode toMirrorTree(TreeNode node) {
+        if (node == null)
+            return null;
+        TreeNode left = toMirrorTree(node.left);
+        TreeNode right = toMirrorTree(node.right);
+        node.left = right;
+        node.right = left;
+        return node;
+    }
+
+    /**
+     * 50
+     * 30     70
+     * 20  40  60 80
+     *
+     * @return
+     */
+    public static TreeNode getDefaultTree() {
+        TreeNode root = buildTree(new int[]{50, 30, 20, 40, 70, 60, 80});
+        return root;
+    }
+
+    public static TreeNode buildTree(int... arr) {
+        TreeNode root = null;
+        for (int i : arr) {
+            root = insertRec(root, i);
+        }
+        return root;
+    }
+
+    private static TreeNode insert(int key) {
+        TreeNode root = insertRec(null, key);
+        return root;
+    }
+
+    /* A recursive function to
+       insert a new key into BST */
+    private static TreeNode insertRec(TreeNode root, int key) {
+        if (root == null) {
+            root = new TreeNode(key);
+            return root;
+        }
+
+        if (key < root.data)
+            root.left = insertRec(root.left, key);
+        else if (key > root.data)
+            root.right = insertRec(root.right, key);
+
         return root;
     }
 }
