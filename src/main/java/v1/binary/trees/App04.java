@@ -11,14 +11,14 @@ public class App04 {
     private boolean pathFinder(TreeNode treeNode, List<TreeNode> paths, int value) {
         if (treeNode == null)
             return false;
-        paths.add(treeNode);
+        paths.add(treeNode); // add every node
         if (treeNode.data == value)
             return true;
         boolean flag = pathFinder(treeNode.left, paths, value) || pathFinder(treeNode.right, paths, value);
-        if (flag)
+        if (flag) // considering the added node for path
             return true;
 
-        paths.remove(paths.size() - 1);
+        paths.remove(paths.size() - 1); // not considering the added node for path
         return false;
     }
 
