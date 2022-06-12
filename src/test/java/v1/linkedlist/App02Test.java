@@ -82,5 +82,11 @@ public class App02Test {
         Node list1 = DsUtils.arrayToLinkedList(1, 2 ,3,45,2,7);
         Node res = app02._12_sort_list_using_mergeSort(list1);
         System.out.println("List as array : "+DsUtils.linkedListAsArray(res));
+        Node list2 =
+                DsUtils.arrayToLinkedList(61 ,91, 95, 42, 27, 36, 91, 4, 2, 53, 92, 82, 21, 16, 18, 95, 47, 26, 71, 38
+                        , 69, 12
+                        , 67, 99, 35, 94, 3, 11);
+        Node res1 = app02._12_sort_list_using_mergeSort(list2);
+        System.out.println("List as array : "+DsUtils.linkedListAsArray(res1));
     }
 }
