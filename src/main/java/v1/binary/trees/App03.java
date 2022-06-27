@@ -1,5 +1,6 @@
 package v1.binary.trees;
 
+
 import commons.TreeNode;
 
 import java.util.*;
@@ -8,6 +9,9 @@ import java.util.*;
 public class App03 {
     int maxDiameter = 0;
     int max_value = 0;
+    int index = 0;
+    TreeNode prev = null;
+    TreeNode head = null;
     List<Integer> left = new ArrayList<>();
     List<Integer> right = new ArrayList<>();
 
@@ -69,6 +73,7 @@ public class App03 {
     int _04_diameterOfTree(TreeNode root) {
 
         int height = diameter(root);
+        System.out.println("height " + height);
         return maxDiameter;
     }
 
@@ -251,17 +256,18 @@ public class App03 {
             }
         }
         for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
-            System.out.print(entry.getValue()+" ");
+            System.out.print(entry.getValue() + " ");
         }
     }
-    void _12_bottomView(TreeNode root){
+
+    void _12_bottomView(TreeNode root) {
         Map<Integer, Integer> map = new TreeMap<>();
         Queue<TreeNode> q = new LinkedList<>();
         if (root == null) return;
         else q.add(root);
         while (!q.isEmpty()) {
             TreeNode temp = q.poll();
-             map.put(temp.hd, temp.data);
+            map.put(temp.hd, temp.data);
             if (temp.left != null) {
                 temp.left.hd = temp.hd - 1;
                 q.add(temp.left);
@@ -272,10 +278,176 @@ public class App03 {
             }
         }
         for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
-            System.out.print(entry.getValue()+" ");
+            System.out.print(entry.getValue() + " ");
         }
+    }
+
+    void _13_zigzagView(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        Stack<TreeNode> currLevel = new Stack<>();
+        Stack<TreeNode> nextLevel = new Stack<>();
+        currLevel.push(root);
+        boolean flag = false;
+        while (!currLevel.isEmpty()) {
+            TreeNode temp = currLevel.pop();
+            System.out.println(temp.data);
+            if (flag) {
+                if (temp.left != null) nextLevel.push(temp.left);
+                if (temp.right != null) nextLevel.push(temp.right);
+            } else {
+                if (temp.right != null) nextLevel.push(temp.right);
+                if (temp.left != null) nextLevel.push(temp.left);
+            }
+            if (currLevel.isEmpty()) {
+                flag = !flag;
+                Stack<TreeNode> swap = currLevel;
+                currLevel = nextLevel;
+                nextLevel = swap;
+            }
+        }
+    }
+
+    boolean _14_isBalance(TreeNode root) {
+        return checkBalance(root) != -1;
+    }
+
+    private int checkBalance(TreeNode root) {
+        if (root == null) return 0;
+        int leftHeight = checkBalance(root.left);
+        if (leftHeight == -1) return -1;
+        int rightHeight = checkBalance(root.right);
+        if (rightHeight == -1) return -1;
+        if (Math.abs(leftHeight - rightHeight) > 1) return -1;
+        else return Math.max(leftHeight, rightHeight) + 1;
+    }
+
+    void _15_printDiagonal(TreeNode root) {
+        Map<Integer, Vector<Integer>> map = new TreeMap<>();
+        printDiagonal(root, map);
+        for (Map.Entry<Integer, Vector<Integer>> entry : map.entrySet())
+            System.out.println(entry.getValue());
+    }
+
+    private void printDiagonal(TreeNode root, Map<Integer, Vector<Integer>> map) {
+        if (root == null) return;
+        Vector<Integer> values = map.get(root.hd);
+        if (values == null) {
+            values = new Vector<>();
+            values.add(root.data);
+        } else values.add(root.data);
+        map.put(root.hd, values);
+        if (root.left != null) root.left.hd = root.hd + 1;
+        printDiagonal(root.left, map);
+        if (root.right != null) root.right.hd = root.hd;
+        printDiagonal(root.right, map);
+    }
+
+    void _16_printBoundary(TreeNode root) {
+        if (root == null) return;
+        System.out.print(root.data + " ");
+        printLeftBoudary(root.left);
+        printLeaves(root.left);
+        printLeaves(root.right);
+        printRightBoundary(root.right);
 
     }
+
+    private void printRightBoundary(TreeNode node) {
+        if (node == null) return;
+        if (node.right != null) {
+            System.out.print(node.data + " ");
+            printRightBoundary(node.right);
+        } else if (node.left != null) {
+            System.out.print(node.data + " ");
+            printRightBoundary(node.left);
+        }
+    }
+
+    private void printLeaves(TreeNode root) {
+        if (root == null) return;
+        printLeaves(root.left);
+        if (root.left == null && root.right == null) System.out.print(root.data + " ");
+        printLeaves(root.right);
+    }
+
+    private void printLeftBoudary(TreeNode node) {
+        if (node == null) return;
+        if (node.left != null) {
+            System.out.print(node.data + " ");
+            printLeftBoudary(node.left);
+        } else if (node.right != null) {
+            System.out.print(node.data + " ");
+            printLeftBoudary(node.right);
+        }
+    }
+
+    public TreeNode _17_constructTree(String s) {
+        int num = 0;
+        if (s == null || s.length() == 0) return null;
+        if (index >= s.length()) return null;
+        boolean neg = false;
+        if (s.charAt(index) == '-') {
+            neg = true;
+            index++;
+        }
+        while (index < s.length() && Character.isDigit(s.charAt(index))) {
+            int digit = Character.getNumericValue(s.charAt(index));
+            num = num * 10 + digit;
+            index++;
+        }
+        if (neg) num = -num;
+        TreeNode node = new TreeNode(num);
+        if (index >= s.length()) return node;
+        if (index < s.length() && s.charAt(index) == '(') {
+            index++;
+            node.left = _17_constructTree(s);
+        }
+        if (index < s.length() && s.charAt(index) == ')') {
+            index++;
+            return node;
+        }
+        if (index < s.length() && s.charAt(index) == '(') {
+            index++;
+            node.right = _17_constructTree(s);
+        }
+        if (index < s.length() && s.charAt(index) == ')') {
+            index++;
+            return node;
+        }
+        return node;
+    }
+
+    void printTree(TreeNode node) {
+        if (node == null) return;
+
+        System.out.println(node.data + " ");
+        printTree(node.left);
+        printTree(node.right);
+    }
+    void convertTreeToDll(TreeNode root){
+        if (root == null) return;
+        convertTreeToDll(root.left);
+        if (prev==null)  head = root;
+        else {
+            root.left = prev;
+            prev.right = root;
+        }
+        prev=root;
+        convertTreeToDll(root.right);
+    }
+    void _18_convertTreeToDll(TreeNode root){
+        convertTreeToDll(root);
+        printDllOfTree(head);
+    }
+    void printDllOfTree(TreeNode head){
+        while (head!=null){
+            System.out.println(head.data);
+            head = head.right;
+        }
+    }
+
 
 }
 

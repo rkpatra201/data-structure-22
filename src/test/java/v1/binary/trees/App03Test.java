@@ -99,4 +99,35 @@ public class App03Test {
         TreeNode root = DsUtils.getDefaultTree();
         app03._12_bottomView(root);
     }
+    @Test
+    void _13_zigagView(){
+        TreeNode root = DsUtils.getDefaultTree();
+        app03._13_zigzagView(root);
+    }
+    @Test
+    void _14_balance(){
+        TreeNode root = DsUtils.getDefaultTree();
+        Assertions.assertEquals(true,app03._14_isBalance(root));
+    }
+    @Test
+    void _15_printDiagonal(){
+        TreeNode root = DsUtils.getDefaultTree();
+        app03._15_printDiagonal(root);
+    }
+    @Test
+    void _16_printBoundary(){
+        TreeNode root = DsUtils.getDefaultTree();
+        app03._16_printBoundary(root);
+    }
+    @Test
+    void _17_printBoundary(){
+        String s = "4(2(3)(1))(6(5))";
+        TreeNode root = app03._17_constructTree(s);
+        app03.printTree(root);
+    }
+    @Test
+    void _18_convertToDll(){
+        TreeNode root = DsUtils.getDefaultTree();
+        app03._18_convertTreeToDll(root);
+    }
 }
