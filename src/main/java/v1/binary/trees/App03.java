@@ -426,28 +426,54 @@ public class App03 {
         printTree(node.left);
         printTree(node.right);
     }
-    void convertTreeToDll(TreeNode root){
+
+    void convertTreeToDll(TreeNode root) {
         if (root == null) return;
         convertTreeToDll(root.left);
-        if (prev==null)  head = root;
+        if (prev == null) head = root;
         else {
             root.left = prev;
             prev.right = root;
         }
-        prev=root;
+        prev = root;
         convertTreeToDll(root.right);
     }
-    void _18_convertTreeToDll(TreeNode root){
+
+    void _18_convertTreeToDll(TreeNode root) {
         convertTreeToDll(root);
         printDllOfTree(head);
     }
-    void printDllOfTree(TreeNode head){
-        while (head!=null){
+
+    void printDllOfTree(TreeNode head) {
+        while (head != null) {
             System.out.println(head.data);
             head = head.right;
         }
     }
 
+    int _19_convertingBSTtoSumTree(TreeNode root) {
+        if (root == null) return 0;
+        int prev = root.data;
+        root.data = _19_convertingBSTtoSumTree(root.left)+_19_convertingBSTtoSumTree(root.right);
+        return prev+root.data;
+    }
+    TreeNode _20_mapping(String pre , String in ,HashMap<Character,Integer> map){
+        for (int i = 0; i < in.length(); i++) {
+            map.put(in.charAt(i),i);
+        }
+        return buildTreeUsingPreAndIn( pre , in , map ,0,in.length()-1);
+    }
+    int preIndex =0;
+    private TreeNode buildTreeUsingPreAndIn(String pre, String in, HashMap<Character, Integer> map,int inStart ,int inEnd) {
+        if(inStart>inEnd) return null;
+        char curr = pre.charAt(preIndex++);
+        TreeNode node = new TreeNode(curr);
+        if(inStart==inEnd) return node;
+        int inIndex =map.get(curr);
+        node.left=buildTreeUsingPreAndIn(pre ,in ,map,inStart,inIndex-1);
+        node.right = buildTreeUsingPreAndIn(pre,in,map,inIndex+1,inEnd);
+        return node;
+    }
 
 }
 

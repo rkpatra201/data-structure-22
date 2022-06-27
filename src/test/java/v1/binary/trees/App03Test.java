@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
+
 public class App03Test {
     private App03 app03;
 
@@ -129,5 +131,19 @@ public class App03Test {
     void _18_convertToDll(){
         TreeNode root = DsUtils.getDefaultTree();
         app03._18_convertTreeToDll(root);
+    }
+    @Test
+    void _19_convertToSumTree(){
+        TreeNode root = DsUtils.getDefaultTree();
+        app03._19_convertingBSTtoSumTree(root);
+        app03.printTree(root);
+    }
+    @Test
+    void _20_buildTreeusingPreAndIn(){
+        String pre ="ABDECF";
+        String In = "DBEAFC";
+        HashMap<Character,Integer> map = new HashMap<>();
+        TreeNode root= app03._20_mapping(pre,In,map);
+        app03.printTree(root);
     }
 }
