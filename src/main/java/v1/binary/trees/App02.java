@@ -8,6 +8,7 @@ import java.util.*;
 
 // Question 11 - 20 both inclusive
 public class App02 {
+    int diaMeter;
     public ArrayList<Integer> _1_level_order_traversal_by_height_calc(TreeNode treeNode){
         ArrayList<Integer> traversalRes = new ArrayList<>();
         int height = _3_get_Height_Of_Binary_Tree(treeNode);
@@ -119,5 +120,70 @@ public class App02 {
 
         return stack;
 
+    }
+    public int diameter(TreeNode root){
+        int height = _4_diameter_of_tree(root);
+        return diaMeter;
+    }
+
+
+    public int _4_diameter_of_tree(TreeNode treeNode){
+        if (treeNode == null)
+            return 0;
+
+        int lHeight = _4_diameter_of_tree(treeNode.left);
+        int rHeight = _4_diameter_of_tree(treeNode.right);
+
+        diaMeter = Math.max(diaMeter, (lHeight+rHeight+1));
+        // height of the tree at present node.
+        return Math.max(lHeight,rHeight)+1;
+    }
+
+    public TreeNode _5_mirror_of_binary_tree(TreeNode treeNode) {
+        if (treeNode == null){
+            return null;
+        }
+
+        TreeNode mirrorTree = createMirrorTree(treeNode.data);
+        mirrorTree.left = _5_mirror_of_binary_tree(treeNode.right);
+        mirrorTree.right = _5_mirror_of_binary_tree(treeNode.left);
+
+        return mirrorTree;
+    }
+
+    private TreeNode createMirrorTree(int data) {
+        TreeNode mirror = new TreeNode();
+        mirror.data = data;
+        mirror.left = mirror.right = null;
+        return mirror;
+    }
+
+
+    public void _6_inorder_traversal(TreeNode treeNode) {
+        // inorder -> left -> root -> right
+        if (treeNode == null)
+            return;
+
+        _6_inorder_traversal(treeNode.left);
+        System.out.println(treeNode.data);
+        _6_inorder_traversal(treeNode.right);
+    }
+
+    public void _7_preOrder_traversal(TreeNode treeNode) {
+        if (treeNode == null)
+            return;
+
+        System.out.println(treeNode.data);
+        _7_preOrder_traversal(treeNode.left);
+        _7_preOrder_traversal(treeNode.right);
+    }
+
+    public void _8_postOrder_traversal(TreeNode treeNode) {
+        if (treeNode == null)
+            return;
+
+        _8_postOrder_traversal(treeNode.left);
+        _8_postOrder_traversal(treeNode.right);
+        System.out.println(treeNode.data);
     }
 }
