@@ -7,6 +7,7 @@ import java.util.*;
 
 // Question 21 - 30 both inclusive
 public class App03 {
+
     int maxDiameter = 0;
     int max_value = 0;
     int index = 0;
@@ -14,6 +15,9 @@ public class App03 {
     TreeNode head = null;
     List<Integer> left = new ArrayList<>();
     List<Integer> right = new ArrayList<>();
+    int preIndex = 0;
+    Vector<Integer> ver = new Vector<>();
+    int sum = 0;
 
     void _01_levelOrderTraversal(TreeNode node) {
         Queue<TreeNode> queue = new LinkedList<>();
@@ -454,25 +458,176 @@ public class App03 {
     int _19_convertingBSTtoSumTree(TreeNode root) {
         if (root == null) return 0;
         int prev = root.data;
-        root.data = _19_convertingBSTtoSumTree(root.left)+_19_convertingBSTtoSumTree(root.right);
-        return prev+root.data;
+        root.data = _19_convertingBSTtoSumTree(root.left) + _19_convertingBSTtoSumTree(root.right);
+        return prev + root.data;
     }
-    TreeNode _20_mapping(String pre , String in ,HashMap<Character,Integer> map){
+
+    TreeNode _20_mapping(String pre, String in, HashMap<Character, Integer> map) {
         for (int i = 0; i < in.length(); i++) {
-            map.put(in.charAt(i),i);
+            map.put(in.charAt(i), i);
         }
-        return buildTreeUsingPreAndIn( pre , in , map ,0,in.length()-1);
+        return buildTreeUsingPreAndIn(pre, in, map, 0, in.length() - 1);
     }
-    int preIndex =0;
-    private TreeNode buildTreeUsingPreAndIn(String pre, String in, HashMap<Character, Integer> map,int inStart ,int inEnd) {
-        if(inStart>inEnd) return null;
+
+    private TreeNode buildTreeUsingPreAndIn(String pre, String in, HashMap<Character, Integer> map, int inStart, int inEnd) {
+        if (inStart > inEnd) return null;
         char curr = pre.charAt(preIndex++);
         TreeNode node = new TreeNode(curr);
-        if(inStart==inEnd) return node;
-        int inIndex =map.get(curr);
-        node.left=buildTreeUsingPreAndIn(pre ,in ,map,inStart,inIndex-1);
-        node.right = buildTreeUsingPreAndIn(pre,in,map,inIndex+1,inEnd);
+        if (inStart == inEnd) return node;
+        int inIndex = map.get(curr);
+        node.left = buildTreeUsingPreAndIn(pre, in, map, inStart, inIndex - 1);
+        node.right = buildTreeUsingPreAndIn(pre, in, map, inIndex + 1, inEnd);
         return node;
+    }
+
+    List<Integer> treeAp(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        int sum = 0, prev = 0, value = 0, diff = 0;
+        if (root == null) {
+            return list;
+        }
+        Stack<TreeNode> currLevel = new Stack<>();
+        Stack<TreeNode> nextLevel = new Stack<>();
+        currLevel.push(root);
+        boolean flag = false;
+        while (!currLevel.isEmpty()) {
+            TreeNode temp = currLevel.pop();
+            sum = sum + temp.data;
+            System.out.println(temp.data);
+            if (flag) {
+                if (temp.left != null) nextLevel.push(temp.left);
+                if (temp.right != null) nextLevel.push(temp.right);
+            } else {
+                if (temp.right != null) nextLevel.push(temp.right);
+                if (temp.left != null) nextLevel.push(temp.left);
+            }
+            if (currLevel.isEmpty()) {
+                flag = !flag;
+                Stack<TreeNode> swap = currLevel;
+                currLevel = nextLevel;
+                nextLevel = swap;
+                value = sum - prev;
+                if (list.isEmpty()) {
+                    list.add(0);
+                    diff = sum;
+                } else {
+                    list.add(diff - value);
+                }
+                prev = sum;
+                sum = 0;
+            }
+        }
+        return list;
+    }
+
+    List<Integer> treeAp_1(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        int sum = 0, prev = 0, value = 0, diff = 0;
+        if (root == null) {
+            return list;
+        }
+        queue.add(root);
+        queue.add(null);
+        while (!queue.isEmpty()) {
+            TreeNode temp = queue.poll();
+            if (temp == null) {
+                value = sum - prev;
+                if (list.isEmpty()) {
+                    list.add(0);
+                    diff = sum;
+                } else {
+                    list.add(diff - value);
+                }
+                prev = sum;
+                sum = 0;
+                if (queue.size() == 0) break;
+                queue.add(null);
+                temp = queue.poll();
+            }
+            sum = sum + temp.data;
+            System.out.print(temp.data + " ");
+            if (temp.left != null) {
+                queue.add(temp.left);
+            }
+            if (temp.right != null) {
+                queue.add(temp.right);
+            }
+        }
+        return list;
+    }
+
+    void inorederTraversal(TreeNode root) {
+        if (root == null) return;
+        inorederTraversal(root.left);
+        ver.add(root.data);
+        inorederTraversal(root.right);
+    }
+
+    int _20_minSwaps() {
+        int swap = 0;
+        int n = ver.size();
+        ArrayList<Pair> arr = new ArrayList<Pair>();
+        for (int i = 0; i < n; i++) {
+            arr.add(new Pair(ver.get(i), i));
+        }
+        //System.out.println(arr);
+        arr.sort(new Comparator<Pair>() {
+            @Override
+            public int compare(Pair o1, Pair o2) {
+                return o1.first - o2.first;
+            }
+        });
+        for (int i = 0; i < arr.size(); i++) {
+            if (arr.get(i).second == i) continue;
+            else {
+                ++swap;
+                Pair temp = arr.get(i);
+                arr.add(i, arr.get(arr.get(i).second));
+                arr.add(arr.get(i).second, temp);
+                --i;
+            }
+        }
+        System.out.println(swap);
+        return swap;
+    }
+
+    boolean _21_isSumTree(TreeNode root) {
+        inorderTraversal(root);
+       // System.out.println(sum);
+        if (2 * root.data == sum) return true;
+        else return false;
+    }
+
+    void inorderTraversal(TreeNode root) {
+        if (root == null) return;
+        inorderTraversal(root.left);
+        sum = sum + root.data;
+        inorderTraversal(root.right);
+    }
+
+    static class Pair {
+        int first, second;
+
+        Pair(int a, int b) {
+            first = a;
+            second = b;
+        }
+    }
+    int Ilevel =0;
+    boolean _22_checkLeafLevel(TreeNode root , int level){
+        if (root == null) {
+            return true;
+        }
+        if(root.left==null && root.right==null){
+            if (Ilevel==0){
+                Ilevel=level;
+                return true;
+            }
+            return (level==Ilevel);
+        }
+        return _22_checkLeafLevel(root.left,level+1) && _22_checkLeafLevel(root.right,level+1);
+
     }
 
 }
