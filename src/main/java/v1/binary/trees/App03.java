@@ -18,6 +18,7 @@ public class App03 {
     int preIndex = 0;
     Vector<Integer> ver = new Vector<>();
     int sum = 0;
+    int Ilevel = 0;
 
     void _01_levelOrderTraversal(TreeNode node) {
         Queue<TreeNode> queue = new LinkedList<>();
@@ -594,9 +595,8 @@ public class App03 {
 
     boolean _21_isSumTree(TreeNode root) {
         inorderTraversal(root);
-       // System.out.println(sum);
-        if (2 * root.data == sum) return true;
-        else return false;
+        // System.out.println(sum);
+        return 2 * root.data == sum;
     }
 
     void inorderTraversal(TreeNode root) {
@@ -606,6 +606,27 @@ public class App03 {
         inorderTraversal(root.right);
     }
 
+    boolean _22_checkLeafLevel(TreeNode root, int level) {
+        if (root == null) {
+            return true;
+        }
+        if (root.left == null && root.right == null) {
+            if (Ilevel == 0) {
+                Ilevel = level;
+                return true;
+            }
+            return (level == Ilevel);
+        }
+        return _22_checkLeafLevel(root.left, level + 1) && _22_checkLeafLevel(root.right, level + 1);
+
+    }
+
+    boolean _23_mirriorTree(TreeNode root1, TreeNode root2) {
+        if (root1 == null && root2 == null) return true;
+        if (root1 == null || root2 == null) return false;
+        return root1.data == root2.data && _23_mirriorTree(root1.left, root2.right) && _23_mirriorTree(root1.right, root2.left);
+    }
+
     static class Pair {
         int first, second;
 
@@ -613,21 +634,6 @@ public class App03 {
             first = a;
             second = b;
         }
-    }
-    int Ilevel =0;
-    boolean _22_checkLeafLevel(TreeNode root , int level){
-        if (root == null) {
-            return true;
-        }
-        if(root.left==null && root.right==null){
-            if (Ilevel==0){
-                Ilevel=level;
-                return true;
-            }
-            return (level==Ilevel);
-        }
-        return _22_checkLeafLevel(root.left,level+1) && _22_checkLeafLevel(root.right,level+1);
-
     }
 
 }
