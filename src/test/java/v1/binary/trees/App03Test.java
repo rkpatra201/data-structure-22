@@ -193,10 +193,26 @@ public class App03Test {
     }
 
     @Test
-    void _23_mirriorTree() {
+    void _24_mirriorTree() {
         TreeNode root1 = DsUtils.getDefaultTree();
         TreeNode root2 = app03._05_mirrorTree(root1);
         root1 = DsUtils.getDefaultTree();
-        System.out.println(app03._23_mirriorTree(root1, root2));
+        System.out.println(app03._24_mirriorTree(root1, root2));
     }
+
+    @Test
+    void _23_dupSubTree() {
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+        root.left.left = new TreeNode(4);
+        root.left.right = new TreeNode(5);
+        root.right.right = new TreeNode(2);
+        root.right.right.right = new TreeNode(5);
+        root.right.right.left = new TreeNode(4);
+        String str = app03._23_dupSub(root);
+        if (str.equals("")) System.out.print(" Yes ");
+        else System.out.print(" No ");
+    }
+
 }

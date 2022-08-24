@@ -621,10 +621,32 @@ public class App03 {
 
     }
 
-    boolean _23_mirriorTree(TreeNode root1, TreeNode root2) {
+    boolean _24_mirriorTree(TreeNode root1, TreeNode root2) {
         if (root1 == null && root2 == null) return true;
         if (root1 == null || root2 == null) return false;
-        return root1.data == root2.data && _23_mirriorTree(root1.left, root2.right) && _23_mirriorTree(root1.right, root2.left);
+        return root1.data == root2.data && _24_mirriorTree(root1.left, root2.right) && _24_mirriorTree(root1.right, root2.left);
+    }
+    static char MARKER = '#';
+    public String _23_dupSub(TreeNode root) {
+        HashSet<String> subtrees = new HashSet<>();
+        return dupSubUtil(root, subtrees);
+    }
+
+    public String dupSubUtil(TreeNode root, HashSet<String> subtrees) {
+        String s = "";
+        if (root == null)
+            return s + MARKER;
+        String lStr = dupSubUtil(root.left, subtrees);
+        if (lStr.equals(s))
+            return s;
+        String rStr = dupSubUtil(root.right, subtrees);
+        if (rStr.equals(s))
+            return s;
+        s = s + root.data + lStr + rStr;
+        if (s.length() > 3 && subtrees.contains(s))
+            return "";
+        subtrees.add(s);
+        return s;
     }
 
     static class Pair {
