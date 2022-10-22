@@ -1,8 +1,6 @@
 package v1.binary.trees;
 
 import commons.TreeNode;
-import javafx.beans.binding.When;
-import sun.reflect.generics.tree.Tree;
 
 import java.util.*;
 

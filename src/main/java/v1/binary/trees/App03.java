@@ -626,7 +626,9 @@ public class App03 {
         if (root1 == null || root2 == null) return false;
         return root1.data == root2.data && _24_mirriorTree(root1.left, root2.right) && _24_mirriorTree(root1.right, root2.left);
     }
+
     static char MARKER = '#';
+
     public String _23_dupSub(TreeNode root) {
         HashSet<String> subtrees = new HashSet<>();
         return dupSubUtil(root, subtrees);
